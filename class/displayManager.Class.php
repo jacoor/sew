@@ -537,7 +537,7 @@ class displayManager extends smarty{
 								'doc_type',
 								'doc_id',
 								'active',
-								'token'
+								'token',
 								);
 		$allowed_doc_type = array(
 												'legitymacja szkolna',
@@ -622,7 +622,7 @@ class displayManager extends smarty{
 			$correct = false;
 		}
 
-		//check if user with thist data already exist
+		//check if user with this data already exist
 
 		if ($correct) { //not to kill database
 			$ar = $this->engine->check_if_object_exists($data, 'volunteer');
@@ -641,6 +641,17 @@ class displayManager extends smarty{
 				}
 			}
 		}
+		//secure check
+		#echo ('<pre>');
+		#var_dump(new volunteer($this->engine,$data));die();
+		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
+		$volunteer = $volunteer[0]->get();
+		$token = sha1($volunteer['id'].$volunteer['login']);
+		if ($token !== $data['token'] ){
+			$this->display('security_alert.html');
+			session_destroy();
+			die;
+		}
 		if($correct){
 			//create new volunteer
 			unset($key);
@@ -658,8 +669,8 @@ class displayManager extends smarty{
 					$data['active']==0;
 				}
 			}
+
 			new volunteer($this->engine,$data);
-			$this->assign('message','Dane zostały zmienione');
 			HTTP::redirect('?action=volunteer_view&id='.$data['id']);
 		}else{
 			$this->assign_by_ref('error_fields',$error_fields);
