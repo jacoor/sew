@@ -240,6 +240,16 @@ class displayManager extends smarty{
 			$error_fields['surname'] = true;
 			$correct = false;
 		}
+		
+		if (!validator::check_zip($data['h_zip'])){
+			$error_fields['h_zip'] = true;
+			$correct = false;
+		}
+
+		if (!validator::check_zip($data['school_zip'])){
+			$error_fields['school_zip'] = true;
+			$correct = false;
+		}
 
 		if (array_search($data['doc_type'], $allowed_doc_type)===false){
 			$error_fields['doc_type'] = true;
@@ -614,6 +624,16 @@ class displayManager extends smarty{
 
 		if (!validator::check_onlyalphabetical($data['surname'])){
 			$error_fields['surname'] = true;
+			$correct = false;
+		}
+		
+		if (!validator::check_zip($data['h_zip'])){
+			$error_fields['h_zip'] = true;
+			$correct = false;
+		}
+
+		if (!validator::check_zip($data['school_zip'])){
+			$error_fields['school_zip'] = true;
 			$correct = false;
 		}
 

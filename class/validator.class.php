@@ -60,6 +60,15 @@ class validator{
 			return (true); 
 		else
 			return (false); 
-  }
+	}
+	
+	public static function check_zip($zip){
+		if(ereg('^[0-9]{2,2}-[0-9]{3,3}$', $zip)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 }
 ?>
