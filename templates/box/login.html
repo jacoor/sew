@@ -1,7 +1,7 @@
 	<form id="login" action="/index.php" method="post">
 		<fieldset>
 		<input type="hidden" name="action" value="login" />
-		<legend> {if !$legend }Jeśli posiadasz już konto w systemie - zaloguj się:{else}{$legend}{/if}</legend>
+		<legend><b> {if !$legend }Jeśli posiadasz już konto w systemie - zaloguj się:{else}{$legend}{/if}</b></legend>
 		{$login_error}
 		<ul>
 			<li><label>login:</label><input type="text" value="" name="fields[username]" /></li>

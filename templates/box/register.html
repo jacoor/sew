@@ -3,7 +3,7 @@
 		{assign var="values" value=$smarty.post.fields}
 		{$register_error}
 		<input type="hidden" name="action" value="register" />
-		<legend> Jeśli nie masz konta - zarejestruj się korzystają z formularza:</legend>
+		<legend> <b>Jeśli nie masz konta - zarejestruj się korzystają z formularza:</b></legend>
 		<ul>
 			<li {if $error_fields.name}class="error"{/if}><label>Imię:</label><input type="text" value="{$values.name}" name="fields[name]" /></li>
 			<li {if $error_fields.surname}class="error"{/if}><label>Nazwisko:</label><input type="text" value="{$values.surname}" name="fields[surname]" /></li>
@@ -39,6 +39,7 @@
 			<li {if $error_fields.doc_id}class="error"{/if}><label>Numer dokumentu tożsamości:</label><input type="text" value="{$values.doc_id}" name="fields[doc_id]" />
 			
 			<li>
+				<hr>
 				<p><b>Adres zameldowania:</b></p>
 				<p>Jest to adres wpisany w Twoim dokumencie tożsamości.</p>
 				<ul>
@@ -67,7 +68,7 @@
 				{$login_unique_error}
 			</li>
 			<li {if $error_fields.password}class="error"{/if}>
-			<p>Hasło musi mieć conajmniej 6 znaków i zawierać przynajmniej jedną liczbę.</p>
+			<p><b>Hasło musi mieć conajmniej 6 znaków i zawierać przynajmniej jedną liczbę.</b></p>
 			<label>hasło:</label><input type="password" value="" name="fields[password]" />
 				{$pass_error}
 			</li>
