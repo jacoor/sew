@@ -15,8 +15,11 @@
 				<p>Adres zameldowania:</p>
 				<p>Jest to adres wpisany w Twoim dokumencie tożsamości.</p>
 				<ul>
-					<li {if $error_fields.h_street}class="error"{/if}> <label>Ulica i nr domu/mieszkania</label><input type="text" name="fields[h_street]" value="{$values.h_street}" /></li>
-					<li {if $error_fields.h_city}class="error"{/if}><label>Miasto i kod pocztowy</label><input type="text" name="fields[h_city]" value="{$values.h_city}" /></li>
+					<li {if $error_fields.h_street}class="error"{/if}> <label>Ulica</label><input type="text" name="fields[h_street]" value="{$values.h_street}" /></li>
+					<li {if $error_fields.h_building}class="error"{/if}> <label>Nr domu</label><input type="text" name="fields[h_building]" value="{$values.h_building}" /></li>
+					<li {if $error_fields.h_loc}class="error"{/if}> <label>Nr mieszkania</label><input type="text" name="fields[h_loc]" value="{$values.h_loc}" /></li>
+					<li {if $error_fields.h_city}class="error"{/if}><label>Miejscowość</label><input type="text" name="fields[h_city]" value="{$values.h_city}" /></li>
+					<li {if $error_fields.h_city}class="error"{/if}><label>Kod pocztowy</label><input type="text" name="fields[h_zip]" value="{$values.h_zip}" /></li>
 				</ul>
 			</li>
 			<li {if $error_fields.school_address}class="error"{/if}><label>Nazwa i adres szkoły/uczelni/zakładu pracy:</label><textarea name="fields[school_address]">{$values.school_address}</textarea>
