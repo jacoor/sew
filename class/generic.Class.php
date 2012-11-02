@@ -9,7 +9,7 @@ require_once	$_SERVER['DOCUMENT_ROOT'].'/class/phpSucksInterface.php';
  */
 class genericClass{
 	protected $engine;
-	protected $changed_flag				= 'loaded'; //loaded is safets, options: created, loaded, updated, deleted, wiped, restored. When created object will save itself in DB
+	protected $changed_flag				= 'loaded'; //loaded is safest, options: created, loaded, updated, deleted, wiped, restored. When created object will save itself in DB
 
 	/**
 	 * 
