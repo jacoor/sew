@@ -23,11 +23,17 @@
 	</tr>
 	<tr>
 		<th>Adres zameldowania:	</th>
-		<td><p>{$volunteer->h_street}</p><p>{$volunteer->h_city}</p></td>
+		<td>
+			<p>{$user->h_street} {$user->h_building} {if $user->h_loc}/{$user->h_loc}{/if}</p>
+			<p>{$user->h_zip} {$user->h_city}</p></td>
 	</tr>
 	<tr>
 		<th>Adres szkoły/uczelni/zakładu pracy:	</th>
-		<td>{$volunteer->school_address}</td>
+		<td>
+			<p>{$user->school_name}</p>
+			<p>{$user->school_street} {$user->school_building} {if $user->school_loc}/{$user->school_loc}{/if}</p>
+			<p>{$user->school_zip} {$user->school_city}</p>
+		</td>
 	</tr>
 	<tr>
 		<th>PESEL:	</th>

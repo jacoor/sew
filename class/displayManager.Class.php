@@ -511,15 +511,25 @@ class displayManager extends smarty{
 								'name',
 								'surname',
 								'email',
-								'school_address',
 								'h_city',
+								'h_zip',
 								'h_street',
+								'h_building',
+								'h_loc',
+								'school_name',
+								'school_street',
+								'school_building',
+								'school_loc',
+								'school_city',
+								'school_zip',
 								'birth_date',
 								'PESEL',
 								'phone',
 								'doc_type',
 								'doc_id',
-								'active'
+								'login',
+								'password',
+								'password_repeat'
 								);
 		$allowed_doc_type = array(
 												'legitymacja szkolna',
