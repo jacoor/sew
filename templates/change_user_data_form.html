@@ -30,18 +30,9 @@
 				</select>
 			</li>
 			{if $user->ACL_check('admin')}
-				<li><label>Konto aktywne:</label><input type="checkbox" value="1" name="fields[active]" {if $values.active==1}checked="checked"{/if}</li>
+				<li><label>Konto aktywne:</label><input type="checkbox" value="1" name="fields[active]" {if $values.active==1}checked="checked"{/if} /></li>
 			{/if}
-			<li>
-				<p>Adres zameldowania:</p>
-				<ul>
-					<li {if $error_fields.h_street}class="error"{/if}> <label>Ulica i nr domu/mieszkania</label><input type="text" name="fields[h_street]" value="{$values.h_street}" /></li>
-					<li {if $error_fields.h_city}class="error"{/if}><label>Miasto i kod pocztowy</label><input type="text" name="fields[h_city]" value="{$values.h_city}" /></li>
-				</ul>
-			</li>
-			<li {if $error_fields.school_address}class="error"{/if}><label>Nazwa i adres szkoły/uczelni/zakładu pracy:</label><textarea name="fields[school_address]">{$values.school_address}</textarea>
-			</li>
-			<li {if $error_fields.birth_date}class="error"{/if}><label>data urodzenia:</label><input type="text" value="{$values.birth_date}" class="jq_date" name="fields[birth_date]" /> (RRRR-MM-DD)
+<li {if $error_fields.birth_date}class="error"{/if}><label>data urodzenia:</label><input type="text" value="{$values.birth_date}" class="jq_date" name="fields[birth_date]" /> (RRRR-MM-DD)
 			</li>
 			<li {if $error_fields.PESEL}class="error"{/if}><label>PESEL:</label><input type="text" value="{$values.PESEL}" name="fields[PESEL]" />
 				{$PESEL_unique_error}
@@ -49,7 +40,7 @@
 			<li {if $error_fields.phone}class="error"{/if}><label>Nr telefonu:</label><input type="text" value="{$values.phone}" name="fields[phone]" />
 			</li>
 			<li {if $error_fields.p_phone}class="error"{/if}><label>Nr telefonu do rodziców:</label><input type="text" value="{$values.p_phone}" name="fields[p_phone]" />
-			<p><strong>Wymagany dla osób niepełnoletnich</strong></p>
+				<br><strong>Wymagany dla osób niepełnoletnich</strong><br><br>
 			</li>
 			<li {if $error_fields.doc_type}class="error"{/if}>
 			<label>Typ dokumentu tożsamości</label>
@@ -65,6 +56,29 @@
 				</select>
 			</li>
 			<li {if $error_fields.doc_id}class="error"{/if}><label>Numer dokumentu tożsamości:</label><input type="text" value="{$values.doc_id}" name="fields[doc_id]" />
+			<li>
+				<hr>
+				<p><b>Adres zameldowania:</b></p>
+				<ul>
+					<li {if $error_fields.h_street}class="error"{/if}> <label>Ulica</label><input type="text" name="fields[h_street]" value="{$values.h_street}" /></li>
+					<li {if $error_fields.h_building}class="error"{/if}> <label>Nr domu</label><input type="text" name="fields[h_building]" value="{$values.h_building}" /></li>
+					<li {if $error_fields.h_loc}class="error"{/if}> <label>Nr mieszkania</label><input type="text" name="fields[h_loc]" value="{$values.h_loc}" /></li>
+					<li {if $error_fields.h_city}class="error"{/if}><label>Miejscowość</label><input type="text" name="fields[h_city]" value="{$values.h_city}" /></li>
+					<li {if $error_fields.h_city}class="error"{/if}><label>Kod pocztowy</label><input type="text" name="fields[h_zip]" value="{$values.h_zip}" /></li>
+				</ul>
+				<hr>
+			</li>
+			<li>
+				<p><b>Dane Szkoły/uczelni/zakładu pracy:</b></p>
+				<ul>
+					<li {if $error_fields.school_name}class="error"{/if}> <label>Nazwa</label><input type="text" name="fields[school_name]" value="{$values.school_name}" /></li>
+					<li {if $error_fields.school_street}class="error"{/if}> <label>Ulica</label><input type="text" name="fields[school_street]" value="{$values.school_street}" /></li>
+					<li {if $error_fields.school_building}class="error"{/if}> <label>Nr domu</label><input type="text" name="fields[school_building]" value="{$values.school_building}" /></li>
+					<li {if $error_fields.school_loc}class="error"{/if}> <label>Nr mieszkania</label><input type="text" name="fields[school_loc]" value="{$values.school_loc}" /></li>
+					<li {if $error_fields.school_city}class="error"{/if}><label>Miejscowość</label><input type="text" name="fields[school_city]" value="{$values.school_city}" /></li>
+					<li {if $error_fields.school_zip}class="error"{/if}><label>Kod pocztowy</label><input type="text" name="fields[school_zip]" value="{$values.school_zip}" /></li>					
+				</ul>
+			</li>
 		</ul>
 		<input type="submit" class="submit"  name="wyślij" value="wyślij" />
 		</fieldset>

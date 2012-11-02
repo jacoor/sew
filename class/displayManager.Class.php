@@ -6,6 +6,7 @@ require_once	$_SERVER['DOCUMENT_ROOT'].'/class/engine.Class.php';
 require_once	$_SERVER['DOCUMENT_ROOT'].'/class/validator.class.php';
 require_once	$_SERVER['DOCUMENT_ROOT'].'/pear/smarty/Smarty.class.php';
 require_once ($_SERVER['DOCUMENT_ROOT'].'/configs/config.php');
+require_once	$_SERVER['DOCUMENT_ROOT'].'/pear/HTTP.php';
 
 
 class displayManager extends smarty{
@@ -367,6 +368,12 @@ class displayManager extends smarty{
 			$this->assign_by_ref('volunteer',$volunteer[0]);
 			$this->assign_by_ref('notices',$this->engine->loadNotices($volunteer[0]->id));
 		}
+		/*
+	    header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+	    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+	    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+	    header("Cache-Control: post-check=0, pre-check=0", false);
+	    header("Pragma: no-cache");*/
 		$this->display('volunteer_account.html');
 	}
 
@@ -527,9 +534,7 @@ class displayManager extends smarty{
 								'phone',
 								'doc_type',
 								'doc_id',
-								'login',
-								'password',
-								'password_repeat'
+								'active'
 								);
 		$allowed_doc_type = array(
 												'legitymacja szkolna',
@@ -652,7 +657,8 @@ class displayManager extends smarty{
 			}
 			new volunteer($this->engine,$data);
 			$this->assign('message','Dane zostały zmienione');
-			$this->volunteer_view($data['id']);
+			HTTP::redirect('?action=volunteer_view&id='.$data['id']);
+			#$this->volunteer_view($data['id']);
 		}else{
 			$this->assign_by_ref('error_fields',$error_fields);
 			$this->assign('update_error','Nie wszystkie pola formularza zostały wypełnione prawidłowo. Popraw błędy i spróbuj jeszcze raz.');
