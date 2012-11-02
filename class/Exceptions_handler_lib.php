@@ -9,8 +9,6 @@ class MySQLIConnectException extends Exception
 	function __construct($inErrmsg, $inErrcode)
 	{
 		header ('Content-type: text/html; charset=utf-8');
-		echo $inErrmsg;
-		echo '<br>';
 		echo ("Wystąpił błąd podczas próby połączenia z bazą danych. Dalsza praca może okazać się niemożliwa. Spróbuj ponownie póżniej lub powiadom administratora systemu");
 		die;
 	}	
