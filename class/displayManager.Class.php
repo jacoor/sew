@@ -519,7 +519,7 @@ class displayManager extends smarty{
 		$this->secure('edit');
 		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
 		$values = $volunteer[0]->get();
-		$values['token'] = sha1($values['id'].$values['login']);
+		$values['token'] = sha1($values['id'].$values['password']);
 		$this->assign_by_ref('values',$values);
 		$this->display('change_user_data_form.html');
 	}
@@ -666,7 +666,7 @@ class displayManager extends smarty{
 		#var_dump(new volunteer($this->engine,$data));die();
 		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
 		$volunteer = $volunteer[0]->get();
-		$token = sha1($volunteer['id'].$volunteer['login']);
+		$token = sha1($volunteer['id'].$volunteer['password']);
 		if ($token !== $data['token'] ){
 			$this->display('security_alert.html');
 			session_destroy();
