@@ -12,6 +12,7 @@
 		{$register_error}
 		<input type="hidden" name="action" value="update_volunteer_data" />
 		<input type="hidden" name="fields[id]" value="{$values.id}" />
+		<input type="hidden" name="fields[token]" value="{$values.token}" />
 		<ul>
 			<li {if $error_fields.name}class="error"{/if}><label>Imię:</label><input type="text" value="{$values.name}" name="fields[name]" /></li>
 			<li {if $error_fields.surname}class="error"{/if}><label>Nazwisko:</label><input type="text" value="{$values.surname}" name="fields[surname]" /></li>

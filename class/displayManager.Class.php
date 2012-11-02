@@ -508,7 +508,9 @@ class displayManager extends smarty{
 	public function change_user_data_form($data) {
 		$this->secure('edit');
 		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
-		$this->assign_by_ref('values',$volunteer[0]->get());
+		$values = $volunteer[0]->get();
+		$values['token'] = sha1($values['id'].$values['login']);
+		$this->assign_by_ref('values',$values);
 		$this->display('change_user_data_form.html');
 	}
 
@@ -534,7 +536,8 @@ class displayManager extends smarty{
 								'phone',
 								'doc_type',
 								'doc_id',
-								'active'
+								'active',
+								'token'
 								);
 		$allowed_doc_type = array(
 												'legitymacja szkolna',
@@ -658,7 +661,6 @@ class displayManager extends smarty{
 			new volunteer($this->engine,$data);
 			$this->assign('message','Dane zostały zmienione');
 			HTTP::redirect('?action=volunteer_view&id='.$data['id']);
-			#$this->volunteer_view($data['id']);
 		}else{
 			$this->assign_by_ref('error_fields',$error_fields);
 			$this->assign('update_error','Nie wszystkie pola formularza zostały wypełnione prawidłowo. Popraw błędy i spróbuj jeszcze raz.');
