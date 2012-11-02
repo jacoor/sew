@@ -1,0 +1,63 @@
+	<form id="register" action="/index.php" method="post">
+		<fieldset>
+		{assign var="values" value=$smarty.post.fields}
+		{$register_error}
+		<input type="hidden" name="action" value="register" />
+		<legend> Jeśli nie masz konta - zarejestruj się korzystają z formularza:</legend>
+		<ul>
+			<li {if $error_fields.name}class="error"{/if}><label>Imię:</label><input type="text" value="{$values.name}" name="fields[name]" /></li>
+			<li {if $error_fields.surname}class="error"{/if}><label>Nazwisko:</label><input type="text" value="{$values.surname}" name="fields[surname]" /></li>
+			<li {if $error_fields.email}class="error"{/if}><label>E-mail:</label><input type="text" value="{$values.email}" name="fields[email]" />
+				{$email_unique_error}
+			<p><strong>Prosimy o podawanie prawdziwych adresów e-mail. Po wypełnieniu formularza na ten adres zostanie wysłany e-mail z linkiem do aktywacji konta i również później będziemy korzystali z tego adresu do kontaktu z Tobą.</strong></p>
+			</li>
+			<li>
+				<p>Adres zameldowania:</p>
+				<p>Jest to adres wpisany w Twoim dokumencie tożsamości.</p>
+				<ul>
+					<li {if $error_fields.h_street}class="error"{/if}> <label>Ulica i nr domu/mieszkania</label><input type="text" name="fields[h_street]" value="{$values.h_street}" /></li>
+					<li {if $error_fields.h_city}class="error"{/if}><label>Miasto i kod pocztowy</label><input type="text" name="fields[h_city]" value="{$values.h_city}" /></li>
+				</ul>
+			</li>
+			<li {if $error_fields.school_address}class="error"{/if}><label>Nazwa i adres szkoły/uczelni/zakładu pracy:</label><textarea name="fields[school_address]">{$values.school_address}</textarea>
+			</li>
+			<li {if $error_fields.birth_date}class="error"{/if}><label>data urodzenia:</label><input type="text" value="{$values.birth_date}" class="jq_date" name="fields[birth_date]" /> (RRRR-MM-DD)
+			<p><strong>Oświadczenie rodzica / opiekuna osoby niepełnoletniej można pobrać pod adresem: <a href="http://sew.wosp.wroc.pl/zgoda.pdf">http://sew.wosp.wroc.pl/zgoda.pdf</a></strong></p>
+			</li>
+			<li {if $error_fields.PESEL}class="error"{/if}><label>PESEL:</label><input type="text" value="{$values.PESEL}" name="fields[PESEL]" />
+				{$PESEL_unique_error}
+			</li>
+			<li {if $error_fields.phone}class="error"{/if}><label>Nr telefonu:</label><input type="text" value="{$values.phone}" name="fields[phone]" />
+				<p>Podaj numer telefonu pod którym jesteś osiągalny/osiągalna. Jeśli nie masz jeszcze 18 lat to w następnum polu wpisz numer do rodziców.</p>
+			</li>
+			<li {if $error_fields.p_phone}class="error"{/if}><label>Nr telefonu do rodziców:</label><input type="text" value="{$values.p_phone}" name="fields[p_phone]" /></li>
+			<li {if $error_fields.doc_type}class="error"{/if}>
+			<label>Typ dokumentu tożsamości</label>
+				<select name="fields[doc_type]">
+					<option {if $values.doc_type=="legitymacja szkolna"}selected="selected"{/if}>legitymacja szkolna</option>
+					<option {if $values.doc_type=="legitymacja studencka"}selected="selected"{/if}>legitymacja studencka</option>
+					<option {if $values.doc_type=="dowód osobisty"}selected="selected"{/if}>dowód osobisty</option>
+					<option {if $values.doc_type=="paszport"}selected="selected"{/if}>paszport</option>
+					<option {if $values.doc_type=="karta stałego pobytu"}selected="selected"{/if}>karta stałego pobytu</option>
+					<option {if $values.doc_type=="prawo jazdy"}selected="selected"{/if}>prawo jazdy</option>
+					<option {if $values.doc_type=="książeczka wojskowa"}selected="selected"{/if}>książeczka wojskowa</option>
+					<option {if $values.doc_type=="inne"}selected="selected"{/if}>inne</option>
+				</select>
+				<p>Jeśli rodzaju dokumentu tożsamości nie ma na liście to w następnym polu oprócz numeru dokumentu podaj jego rodzaj.</p>
+				<p>Pamiętaj też, by ten dokument zabrać na późniejsze spotkanie z nami.</p>
+			</li>
+			<li {if $error_fields.doc_id}class="error"{/if}><label>Numer dokumentu tożsamości:</label><input type="text" value="{$values.doc_id}" name="fields[doc_id]" />
+			
+			<li {if $error_fields.login}class="error"{/if}><label>login:</label><input type="text" value="{$values.login}" name="fields[login]" />
+				{$login_unique_error}
+			</li>
+			<li {if $error_fields.password}class="error"{/if}>
+			<p>Hasło musi mieć conajmniej 6 znaków i zawierać przynajmniej jedną liczbę.</p>
+			<label>hasło:</label><input type="password" value="" name="fields[password]" />
+				{$pass_error}
+			</li>
+			<li {if $error_fields.password_repeat}class="error"{/if}><label>powtórz hasło:</label><input type="password" value="" name="fields[password_repeat]" /></li>
+		</ul>
+		<input type="submit" class="submit"  name="wyślij" value="wyślij" />
+		</fieldset>
+	</form>

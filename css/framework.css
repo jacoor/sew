@@ -1,0 +1,180 @@
+/* piece of framework */
+/* reset */
+body{
+  margin:0;
+  padding:0;
+  border:0 none;
+	line-height:normal;
+}
+
+legend{
+  /**color**/
+}
+img{border:0;}
+frameset, form, fieldset, frame, iframe,  dl, dd, dt, blockquote{
+  border: 0 none;
+  padding:0;
+  margin: 0;
+}
+form{
+	overflow:hidden;
+}
+/* koniec resetu */
+#container{
+  position:relative;
+  margin: 0 auto 0 auto;
+  overflow:hidden;
+}
+
+/* accessibility */
+.skiplist {
+  list-style:none;
+  position:absolute;
+  left:0px;
+  overflow:visible;
+  z-index:20;
+
+}
+a.skiplink{
+  position:absolute;
+  left:-120em;
+  top:0em;
+  z-index:1;
+  color:#000000;
+  font-weight:bold;
+  padding:0.5em;
+  border: solid #000000 1px;
+  text-decoration:none;
+}
+a.skiplink:focus, a.skiplink:active{
+  left:20px;
+  width:20em;
+  top:-380px;
+}
+/* html */
+/*
+    <h2 class="auraltext">[accessibility]skiplinki</h2>         
+         <ul class="skiplist">
+           <li><a href="/{$lang}/{$section}/{$subsection}#header" tabindex="1" title="{translate text="[accessibility]przeskocz do menu"}" accesskey="0" class="skiplink">{translate text="[accessibility]przeskocz do menu"}</a> </li>
+           <li><a href="/{$lang}" tabindex="2" title="{translate text="[accessibility]przeskocz do strony głównej"}" accesskey="1" class="skiplink">{translate text="[accessibility]przeskocz do strony głównej"}</a> </li>
+           <li><a href="/{$lang}/{$section}/{$subsection}#main-content" tabindex="3" title="{translate text="[accessibility]przeskocz do tresci"}" accesskey="2" class="skiplink">{translate text="[accessibility]przeskocz do tresci"}</a></li>
+           <li><a href="/{$lang}/{$section}/{$subsection}#footer" tabindex="4" title="{translate text="[accessibility]przeskocz do stopki"}" accesskey="3" class="skiplink">{translate text="[accessibility]przeskocz do stopki"}</a></li>
+         </ul>
+*/
+
+
+.auraltext{
+  position: absolute !important;
+  font-size: 0 !important;
+  left: -1000em !important;
+  overflow:hidden !important;
+  list-style:none !important;
+  width:0 !important;
+  height:0 !important;
+	border:0 none;
+}
+/* koniec accessibility */
+
+
+/* archiwum wiadomosci - paginacja - układ taki, jak na dokumentacja.wego.pl */
+
+#ArchivePagination{
+  position:relative;
+  height:100%;
+  width:100%;
+  text-align:center;
+  clear:both;
+}
+#ArchivePagination ul{
+  list-style:none;
+  padding:0;
+}
+#ArchivePagination li{
+  display:inline;
+  font-size:0.9em;
+}
+#ArchivePagination li a{
+  padding-left:2px;
+  padding-right:2px;
+  height:100%;
+  text-align:center;
+  
+}
+.PaginationActivePage{
+  font-weight:bold;
+  font-size:1.1em;
+}
+.pagination_image{
+  border:0 none;
+  padding:0;
+}
+/* koniec paginacji */
+
+
+/* stopka */
+#footer {
+  overflow:hidden;
+  position:relative;
+  clear:both;
+  width:100%;
+}
+
+#footer p{
+  float:right;
+  font-size:11px;
+  padding:0 20px 0 20px;
+
+}
+#footer p.first{
+  float:left;
+}
+/* html stopki */
+
+/*
+         <div id="footer2">
+         <p class="first">
+           copyright 2007 by <a href="{$site_root}">{$smarty.server.SERVER_NAME}</a>
+         </p>
+         <p>
+           code &amp; design <a href="http://icenter.pl">icenter.pl</a>, <a href="http://cms.wego.pl">cms</a> by <a href="http://wego.pl">wego.pl</a>
+         </p>
+       </div>
+*/
+
+/* pozostale */
+.block{
+  display:block;
+  position:relative;
+  height:auto;
+  width:auto;
+}
+
+span.error{
+  color:red;
+  display:inline !important;
+  margin: 0 2px 0 2px;
+}
+.error{
+  color:red;
+}
+.error-border{
+  border: 2px solid red !important;
+}
+
+div.hack{
+  clear:both;
+  position:relative;
+}
+
+.separator{
+  width:100%;
+  text-align:right;
+  display:block;
+  clear:both;
+  float:left;
+}
+
+.wysiwyg{
+	position:relative;
+	overflow:hidden;
+}

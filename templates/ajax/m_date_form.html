@@ -1,0 +1,29 @@
+{if $meetings}
+<p>Wybierz termin:</p>
+	<form name="meetings" id="meetings" action="index.php" method="get">
+	<input type="hidden" name="action" value="add_volunteer_to_meeting" />
+		<fieldset>
+		<select id="m_date" name="day">
+			{foreach from=$meetings item="m"}
+				{if $m->date != $date}
+					<option>{$m->date}</option>
+					{assign var="date" value=$m->date}
+				{/if}
+			{/foreach}
+		</select> 
+			{assign var="date" value=$meetings.$key->date}
+			<span id="select_hour">
+				<select name="m_id">
+					{foreach from=$meetings item="m"}
+						{if $m->date == $date}
+							<option value="{$m->id}">{$m->time}</option>
+						{/if}
+					{/foreach}
+				</select>
+			</span>
+			<input type="submit"  value="zapisz termin" />
+		</fieldset>
+	</form>
+{else}
+<p>Terminy wyczerpane. Zapraszamy na spotkanie tak czy inaczej, informacje o miejscu i możliwych datach spotkania podane są na stonie <a href="http://wosp.wroc.pl">wosp.wroc.pl</a></p>
+{/if}

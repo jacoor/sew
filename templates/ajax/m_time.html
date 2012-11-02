@@ -1,0 +1,5 @@
+<select name="m_id">
+				{foreach from=$meetings item="m"}
+						<option value="{$m->id}">{$m->time}</option>
+				{/foreach}
+</select>

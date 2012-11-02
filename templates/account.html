@@ -1,0 +1,75 @@
+{include file="layout/header.html"}
+<h3>Twój profil</h3>
+<table border="0" summary="Dane wolontariusza {$user->name} {$user->surname}">
+	<tr>
+		<th>Imię:	</th>
+		<td>{$user->name}</td>
+	</tr>
+	<tr>
+		<th>Nazwisko:	</th>
+		<td>{$user->surname}</td>
+	</tr>	
+	<tr>
+		<th>Login:	</th>
+		<td>{$user->login}</td>
+	</tr>
+	<tr>
+		<th>E-mail:	</th>
+		<td>{$user->email}</td>
+	</tr>
+	<tr>
+		<th>Adres zameldowania:	</th>
+		<td><p>{$user->h_street}</p><p>{$user->h_city}</p></td>
+	</tr>
+	<tr>
+		<th>Adres szkoły/uczelni/zakładu pracy:	</th>
+		<td>{$user->school_address}</td>
+	</tr>
+	<tr>
+		<th>PESEL:	</th>
+		<td>{$user->PESEL}</td>
+	</tr>
+	<tr>
+		<th>Data urodzenia:	</th>
+		<td>{$user->birth_date}</td>
+	</tr>
+	<tr>
+		<th>Telefon:	</th>
+		<td>{$user->phone}</td>
+	</tr>
+	<tr>
+		<th>Telefon do rodziców:	</th>
+		<td>{$user->p_phone}</td>
+	</tr>
+	<tr>
+		<th>Rodzaj dokumentu tożsamości:	</th>
+		<td>{$user->doc_type}</td>
+	</tr>
+	<tr>
+		<th>Numer dokumentu:	</th>
+		<td>{$user->doc_id}</td>
+	</tr>
+	<tr>
+		<th>Data rejestracji w systemie:	</th>
+		<td>{$user->r_date}</td>
+	</tr>
+</table>
+
+	<div id="meeting">
+	{if !$meeting}
+	<a href="#" >Wybierz termin spotkania z nami:</a>
+	{else}
+	<p>Jesteś już umówiony na spotkanie z nami.</p>
+	<p>Spotkanie odbędzie się w <b>Zespole Szkół Ekonomiczno-Administracyjnych
+	im. Marii Dąbrowskiej</b><br />
+	przy ulicy <b>ul. St.Worcella 3</b><br />
+	w dniu: <b>{$meeting->date}</b><br />
+	o godzinie: <b>{$meeting->time}</b><br />
+	
+	<strong>Oświadczenie rodzica / opiekuna osoby niepełnoletniej można pobrać pod adresem: <a href="http://sew.wosp.wroc.pl/zgoda.pdf">http://sew.wosp.wroc.pl/zgoda.pdf</a></strong>
+</p>
+
+	{/if}
+	</div>
+
+{include file="layout/footer.html"}

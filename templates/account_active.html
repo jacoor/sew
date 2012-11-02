@@ -1,0 +1,15 @@
+{include file="layout/header.html"}
+<div id="content">
+
+{if $error_msg}
+{$error_msg}
+{include file="box/login.html" legend='Logowanie:'}
+{else}
+<h3>Witaj w Systemie Ewidencji Wolontariuszy Wrocławskiego Sztabu WOŚP</h3>
+<p>Aktywacja adresu e-mail została dokonana poprawnie.</p>
+<p><strong>Teraz zaloguj się do systemu i wybierz termin spotkania z nami, żeby ułatwić nam prace i uniknąć stania w długiej kolejce.</strong></p>
+
+{include file="box/login.html" legend='Aby zarejestrować się na spotkanie musisz się zalogować'}
+{/if}
+</div>
+{include file="layout/footer.html"}

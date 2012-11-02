@@ -1,0 +1,52 @@
+{if !$ajax}
+{include file="layout/header.html"}
+{/if}
+{if $user->ACL_check('edit') || $user->ACL_check('notices') }
+<form class="ajaxForm notice" action="/index.php" method="post">
+	<fieldset>
+	<input type="hidden" name="action" value="update_notice_form" />
+	<input type="hidden" name="nid" value="{$notice->id}" />
+	<input type="hidden" name="vid" value="{$volunteer->id}" />
+	<input type="hidden" name="notice[mid]" value="{$notice->mid}" />
+	<input type="hidden" name="notice[m_date]" value="{$notice->m_date}" />
+	{if $notice->author==""}
+		<input type="hidden" name="notice[author]" value="{$user->login}" />
+	{/if}
+		<input type="hidden" name="notice[vid]" value="{$volunteer->id}" />
+	<table border="0" cols="2" summary="Informacje o zdarzeniu wolontariusza" width="100%">
+		<tbody>
+		{if $notice->data}
+			<tr><th>Data utworzenia:</th><td>{$notice->data}</td></tr>
+		{/if}
+		<tr><th>Rodzaj:</th><td>
+		<select name="notice[type_of]" class="type_of">
+			<option {if $notice->type_of=="spotkanie"} selected="selected" {/if}>spotkanie</option>
+			<option {if $notice->type_of=="numer identyfikatora"} selected="selected" {/if}>numer identyfikatora</option>
+			<option {if $notice->type_of=="rozliczenie"} selected="selected" {/if}>rozliczenie</option>
+			<option {if $notice->type_of=="policja"} selected="selected" {/if}>policja</option>
+			<option {if $notice->type_of=="nagroda"} selected="selected" {/if}>nagroda</option>
+			<option {if $notice->type_of=="inne"} selected="selected" {/if}>inne</option>
+		</select></td></tr>
+		<tr><th>Autor:</th><td>{if $notice->author=="self"}Wygenerowane automagicznie{elseif $notice->author}{$notice->author}{else}{$user->login}{/if}</td></tr>
+		<tr class="text_value"><th width="50%">Uwagi:</th><td width="50%"><textarea {if $error_fields.notice.text_value}class="error"{/if} name="notice[text_value]">{$notice->text_value}</textarea></td></tr>
+			<tr class="m_date"><th>Data i godzina spotkania:</th><td>{$notice->m_date}</td></tr>
+			<tr class="m_presence"><th>Brak zdjęcia:</th><td><input  type="checkbox" value="1" name="notice[m_presence]" {if $notice->m_presence}checked="checked"{/if} /></td></tr>
+			<tr class="rank"><th>Ocena:</th><td><input type="text" {if $error_fields.volunteer.rank}class="error"{/if} value="{$volunteer->rank}" name="volunteer[rank]" class="rank_field"/></td></tr>
+			<tr class="rank"><td colspan="2" class="rank_info"><strong>Dopuszczalne są liczby całkowite z zakresu 1 - 5</strong></td></tr>
+
+			<tr class="amount"><th>Zebrana kwota:</th><td><input type="text" {if $error_fields.notice.amount}class="error"{/if} value="{$notice->amount}" name="notice[amount]" /></td></tr>
+			<tr class="valuables"><th>Rzeczy wartościowe:</th><td><input type="text" {if $error_fields.notice.valuables}class="error"{/if} value="{$notice->valuables}" name="notice[valuables]" /></td></tr>
+			<tr class="ident_nr"><th>Numer identyfikatora:</th><td><input type="text" {if $error_fields.notice.ident_nr}class="error"{/if} value="{$notice->ident_nr}" name="notice[ident_nr]" />(LICZBA!)</td></tr>
+			<tr class="final_nr"><th>Numer finału:</th><td><input type="text" value="{$notice->final_nr}" {if $error_fields.notice.final_nr}class="error"{/if} name="notice[final_nr]" /></td></tr>
+
+			<tr><td colspan="2" class="submit_td"><input type="submit" class="submit"  value="wyślij" /></td></tr>
+		</tbody>
+	</table>
+	</fieldset>
+</form>
+{else}
+	<h2 class="error">Brak uprawnień</h2>
+{/if}
+{if !$ajax}
+{include file="layout/footer.html"}
+{/if}

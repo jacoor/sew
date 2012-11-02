@@ -1,0 +1,102 @@
+{include file="layout/header.html"}
+{if $user->ACL_check('view')}
+<h3><span>Dane wolontariusza</span> {if $user->ACL_check('edit')}<a id="change_volunteer_data" href="/index.php?action=change_user_data&amp;id={$volunteer->id}">zmień dane wolontariusza</a>{/if}</h3>
+{if $message}
+	<p class="error">{$message}</p>
+{/if}
+<table border="0" summary="Dane wolontariusza {$volunteer->name} {$volunteer->surname}">
+	<tr>
+		<th>Imię:	</th>
+		<td>{$volunteer->name}</td>
+	</tr>
+	<tr>
+		<th>Nazwisko:	</th>
+		<td>{$volunteer->surname}</td>
+	</tr>	
+	<tr>
+		<th>Login:	</th>
+		<td>{$volunteer->login}</td>
+	</tr>
+	<tr>
+		<th>E-mail:	</th>
+		<td>{$volunteer->email}</td>
+	</tr>
+	<tr>
+		<th>Adres zameldowania:	</th>
+		<td><p>{$volunteer->h_street}</p><p>{$volunteer->h_city}</p></td>
+	</tr>
+	<tr>
+		<th>Adres szkoły/uczelni/zakładu pracy:	</th>
+		<td>{$volunteer->school_address}</td>
+	</tr>
+	<tr>
+		<th>PESEL:	</th>
+		<td>{$volunteer->PESEL}</td>
+	</tr>
+	<tr>
+		<th>Data urodzenia:	</th>
+		<td>{$volunteer->birth_date}</td>
+	</tr>
+	<tr>
+		<th>Telefon:	</th>
+		<td>{$volunteer->phone}</td>
+	</tr>
+	<tr>
+		<th>Telefon do rodziców:	</th>
+		<td>{$volunteer->p_phone}</td>
+	</tr>
+	<tr>
+		<th>Rodzaj dokumentu tożsamości:	</th>
+		<td>{$volunteer->doc_type}</td>
+	</tr>
+	<tr>
+		<th>Numer dokumentu:	</th>
+		<td>{$volunteer->doc_id}</td>
+	</tr>
+	<tr>
+		<th>Data rejestracji w systemie:	</th>
+		<td>{$volunteer->r_date}</td>
+	</tr>
+	<tr>
+		<th>Ocena:	</th>
+		<td>{$volunteer->rank}</td>
+	</tr>
+	<tr>
+		<th>Typ:	</th>
+		<td>{$volunteer->type}</td>
+	</tr>
+	<tr>
+		<th>Czy konto zostało aktywowane:	</th>
+		<td>{if $volunteer->active==1}tak{else}nie{/if}</td>
+	</tr>
+		<tr>
+		<th>Uprawnienia:	</th>
+		<td id="user_privileges">
+				<p>Podgląd własnego konta: {if $volunteer->ACL_check(self)}tak{else}nie{/if}</p>
+				<p>Przegląd innych wolontariuszy: {if $volunteer->ACL_check(view)}tak{else}nie{/if}</p>
+				<p>Edycja zdarzeń wolontariuszy: {if $volunteer->ACL_check(notices)}tak{else}nie{/if} (uprawnia do przeglądania)</p>
+				<p>Edycja danych wolontariuszy: {if $volunteer->ACL_check(edit)}tak{else}nie{/if} (uprawnia do przeglądania)</p>
+				<p>Edycja tekstów w systemie: {if $volunteer->ACL_check(a_edit)}tak{else}nie{/if} (to jeszcze nie działa)</p>
+				<p>Administrator: {if $volunteer->ACL_check(admin)}tak{else}nie{/if}</p>
+				<p>Władca marionetek: {if $volunteer->ACL_check(superadmin)}tak{else}nie{/if}</p>
+		</td>
+	</tr>
+</table>
+<table border="0" summary="Zdarzenia wolontariusza {$volunteer->name} {$volunteer->surname}" width="100%">
+<tr><th>Zdarzenia wolontariusza (typ, data, kto wystawił)</th></tr>
+	{if $notices}
+		{foreach from=$notices item="n"}
+			<tr><td id="form_{$n->id}">{$n->type_of}, {$n->data}, {if $n->author=='self'}wygenerowane automatycznie {else}{$n->author}{/if} <a href="/?action=notice_view&amp;nid={$n->id}&amp;id={$volunteer->id}" class="notice_view">Więcej informacji</a></td></tr>
+		{/foreach}
+	{else}
+		<tr><td colspan="2">Brak zdarzeń</td></tr>
+	{/if}
+	{if $user->ACL_check(notices) || $user->ACL_check(edit) }
+		<tr><td colspan="2" id="notice_create_td"><a id="notice_create" href="/index.php?action=notice_create&amp;vid={$volunteer->id}">dodaj zdarzenie</a></td></tr>
+	{/if}
+</table>
+{else}
+	<h2 class="error">Brak uprawnień.</h2>
+{/if}
+{include file="layout/footer.html"}
+

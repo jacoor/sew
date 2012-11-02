@@ -1,0 +1,35 @@
+{if $ajax=='null'}
+{include file="layout/header.html"}
+{/if}
+{if $user->ACL_check('view')}
+{if $message}
+ <p style="text-align:center" class="error"><strong>{$message}</strong></p>
+{/if}
+<table class="notice_details" border="0" width="100%" summary="Detale zdarzenia" >
+	<tbody>
+		<tr><th>Data utworzenia:</th><td>{$notice->data}</td></tr>
+		<tr><th>Rodzaj:</th><td>{$notice->type_of}</td></tr>
+		<tr><th>Autor:</th><td>{if $notice->author=="self"}Wygenerowane automagicznie{else}{$notice->author}{/if}</td></tr>
+		<tr><th>Uwagi:</th><td>{$notice->text_value}</td></tr>
+		{if $notice->type_of=="spotkanie"}
+			<tr><th>Data i godzina spotkania:</th><td>{$notice->m_date}</td></tr>
+			<tr><th>Obecność na spotkaniu:</th><td>{if $notice->m_presence}tak{else}nie{/if}</td></tr>
+		{elseif $notice->type_of=="rozliczenie"}
+			<tr><th>Zebrana kwota:</th><td>{$notice->amount}</td></tr>
+			<tr><th>Rzeczy wartościowe:</th><td>{$notice->valuables}</td></tr>
+			<tr><th>Numer finału:</th><td>{$notice->final_nr}</td></tr>
+		{elseif $notice->type_of=="numer identyfikatora"}
+			<tr><th>Numer identyfikatora:</th><td>{$notice->ident_nr}</td></tr>
+			<tr><th>Numer finału:</th><td>{$notice->final_nr}</td></tr>
+		{/if}
+		{if $user->ACL_check(notices) || $user->ACL_check(edit) }
+		<tr><th colspan="2"><a class="notice_change" href="/?action=update_notice_form&amp;nid={$notice->id}&amp;vid={if $smarty.request.id}{$smarty.request.id}{else}{$smarty.request.vid}{/if}">Modyfikuj zdarzenie</a></th></tr>
+		{/if}
+	</tbody>
+</table>
+{else}
+	<h2 class="error">Brak uprawnień</h2>
+{/if}
+{if $ajax=='null'}
+{include file="layout/footer.html"}
+{/if}

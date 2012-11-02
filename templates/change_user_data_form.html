@@ -1,0 +1,74 @@
+{include file="layout/header.html"}
+<h3>Zmiana danych wolontariusza</h3>
+{if $update_error}
+	<p class="error">{$update_error}</p>
+{/if}
+{if $user->ACL_check('edit')}
+	<form id="register" action="/index.php" method="post">
+		<fieldset>
+		{if $smarty.post.fields}
+			{assign var="values" value=$smarty.post.fields}
+		{/if}
+		{$register_error}
+		<input type="hidden" name="action" value="update_volunteer_data" />
+		<input type="hidden" name="fields[id]" value="{$values.id}" />
+		<ul>
+			<li {if $error_fields.name}class="error"{/if}><label>Imię:</label><input type="text" value="{$values.name}" name="fields[name]" /></li>
+			<li {if $error_fields.surname}class="error"{/if}><label>Nazwisko:</label><input type="text" value="{$values.surname}" name="fields[surname]" /></li>
+			<li {if $error_fields.email}class="error"{/if}><label>E-mail:</label><input type="text" value="{$values.email}" name="fields[email]" />
+				{$email_unique_error}
+			</li>
+			<li>
+				<label>Typ użytkownika:</label>
+				<select name="fields[type]" {if $error_fields.type}class="error"{/if}>
+					<option {if $values.type=="nie dotyczy"} selected="selected"{/if}>nie dotyczy</option>
+					<option {if $values.type=="zakwalifikowany na finał"} selected="selected"{/if}>zakwalifikowany na finał</option>
+					<option value="ppatrol"{if $values.type=="ppatrol"} selected="selected"{/if}>patrol</option>
+					<option {if $values.type=="sztab"} selected="selected"{/if}>sztab</option>
+					<option {if $values.type=="zaufany"} selected="selected"{/if}>zaufany</option>
+					<option {if $values.type=="czarna lista"} selected="selected"{/if}>czarna lista</option>
+				</select>
+			</li>
+			{if $user->ACL_check('admin')}
+				<li><label>Konto aktywne:</label><input type="checkbox" value="1" name="fields[active]" {if $values.active==1}checked="checked"{/if}</li>
+			{/if}
+			<li>
+				<p>Adres zameldowania:</p>
+				<ul>
+					<li {if $error_fields.h_street}class="error"{/if}> <label>Ulica i nr domu/mieszkania</label><input type="text" name="fields[h_street]" value="{$values.h_street}" /></li>
+					<li {if $error_fields.h_city}class="error"{/if}><label>Miasto i kod pocztowy</label><input type="text" name="fields[h_city]" value="{$values.h_city}" /></li>
+				</ul>
+			</li>
+			<li {if $error_fields.school_address}class="error"{/if}><label>Nazwa i adres szkoły/uczelni/zakładu pracy:</label><textarea name="fields[school_address]">{$values.school_address}</textarea>
+			</li>
+			<li {if $error_fields.birth_date}class="error"{/if}><label>data urodzenia:</label><input type="text" value="{$values.birth_date}" class="jq_date" name="fields[birth_date]" /> (RRRR-MM-DD)
+			</li>
+			<li {if $error_fields.PESEL}class="error"{/if}><label>PESEL:</label><input type="text" value="{$values.PESEL}" name="fields[PESEL]" />
+				{$PESEL_unique_error}
+			</li>
+			<li {if $error_fields.phone}class="error"{/if}><label>Nr telefonu:</label><input type="text" value="{$values.phone}" name="fields[phone]" />
+			</li>
+			<li {if $error_fields.p_phone}class="error"{/if}><label>Nr telefonu do rodziców:</label><input type="text" value="{$values.p_phone}" name="fields[p_phone]" />
+			<p><strong>Wymagany dla osób niepełnoletnich</strong></p>
+			</li>
+			<li {if $error_fields.doc_type}class="error"{/if}>
+			<label>Typ dokumentu tożsamości</label>
+				<select name="fields[doc_type]">
+					<option {if $values.doc_type=="legitymacja szkolna"}selected="selected"{/if}>legitymacja szkolna</option>
+					<option {if $values.doc_type=="legitymacja studencka"}selected="selected"{/if}>legitymacja studencka</option>
+					<option {if $values.doc_type=="dowód osobisty"}selected="selected"{/if}>dowód osobisty</option>
+					<option {if $values.doc_type=="paszport"}selected="selected"{/if}>paszport</option>
+					<option {if $values.doc_type=="karta stałego pobytu"}selected="selected"{/if}>karta stałego pobytu</option>
+					<option {if $values.doc_type=="prawo jazdy"}selected="selected"{/if}>prawo jazdy</option>
+					<option {if $values.doc_type=="książeczka wojskowa"}selected="selected"{/if}>książeczka wojskowa</option>
+					<option {if $values.doc_type=="inne"}selected="selected"{/if}>inne</option>
+				</select>
+			</li>
+			<li {if $error_fields.doc_id}class="error"{/if}><label>Numer dokumentu tożsamości:</label><input type="text" value="{$values.doc_id}" name="fields[doc_id]" />
+		</ul>
+		<input type="submit" class="submit"  name="wyślij" value="wyślij" />
+		</fieldset>
+	</form>
+{/if}
+
+{include file="layout/footer.html"}

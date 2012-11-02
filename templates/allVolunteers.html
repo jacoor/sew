@@ -1,0 +1,43 @@
+{include file="layout/header.html"}
+{if $user->ACL_check('view')}
+<h3>Lista wszystkich wolontariuszy (razem: {$volunteers|@count})</h3>
+<p class="legend">legenda:</p>
+<ul class="legend">
+	<li class="czarnaLista">Czarna lista</li>
+	<li class="ppatrol">Pokojowy Patrol</li>
+	<li class="sztab">Sztab</li>
+	<li class="zaufany">Zaufany</li>
+	<li class="naFinale">Zakwalifikowany na finał</li>
+	<li>Nie dotyczy</li>
+</ul>
+<table border="1" summary="Lista Wolontariuszy" width="100%" id="allVolunteers">
+	<tr><th>Nazwisko</th><th>Imię</th><th>PESEL</th><th>Nr. identyfikatora</th></tr>
+ {if $volunteers}
+  {foreach from=$volunteers item="v"}
+	<tr class="{if $v->type=='czarna lista'} czarnaLista 
+		{elseif $v->type=='ppatrol'} ppatrol
+		{elseif $v->type=='sztab'} sztab
+		{elseif $v->type=='zaufany'} zaufany
+		{elseif $v->type=='zakwalifikowany na finał'} naFinale {/if}" >
+		<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->surname}</a></td>
+		<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->name}</a></td>
+		<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->PESEL}</a></td>
+		{assign var="id" value= $v->id}
+		<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$idents.$id}</a></td>
+	</tr>
+	{/foreach}
+{/if}
+</table>
+<p class="legend">legenda:</p>
+<ul class="legend">
+	<li class="czarnaLista">Czarna lista</li>
+	<li class="ppatrol">Pokojowy Patrol</li>
+	<li class="sztab">Sztab</li>
+	<li class="zaufany">Zaufany</li>
+	<li class="naFinale">Zakwalifikowany na finał</li>
+	<li>Nie dotyczy</li>
+</ul>
+{else}
+	<h2 class="error">Brak uprawnień.</h2>
+{/if}
+{include file="layout/footer.html"}

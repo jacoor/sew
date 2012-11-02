@@ -1,0 +1,13 @@
+{if $smarty.session.logged_in and $smarty.template!='index.html'}
+<div id="left">
+<ul>
+{if $user->ACL_check('view')}
+<li>Jesteś zalogowany jako:<strong>{$user->login}</strong></li>
+{/if}
+<li><a href="/index.php?action=logout">Wyloguj</a></li>
+{if $user->ACL_check('view')}
+	<li><a href="/?action=volunteer_list">Lista wolontariuszy</a></li>
+{/if}
+</ul>
+</div>
+{/if}

@@ -1,0 +1,32 @@
+body{
+  _behavior: url("/css/csshover.htc");
+}
+#menu{
+  zoom:1;
+}
+#menu li.top{
+  _position:relative;
+}
+#menu li.top a.top_links{
+  _height:29px;
+  _text-align:center;
+  _display:inline-block;
+}
+
+#menu li.top a.top_links:hover, #menu li.top a.active{
+  _height:25px;
+}
+
+.submenu{
+  clear:both;
+  _top:40px;
+}
+
+
+#menu li.top:hover ul.submenu{
+  _left:0;
+}
+
+.submenu_li a{
+  _display:inline-block;
+}
