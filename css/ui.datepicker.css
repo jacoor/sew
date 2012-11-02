@@ -103,6 +103,9 @@ img.ui-datepicker-trigger {
 	border: 0px;
 	font-weight: bold;
 }
+.ui-datepicker-header select option{
+	color:#333;
+}
 .ui-datepicker {
 	background: #ccc;
 	text-align: center;
