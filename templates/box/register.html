@@ -11,20 +11,7 @@
 				{$email_unique_error}
 			<p><strong>Prosimy o podawanie prawdziwych adresów e-mail. Po wypełnieniu formularza na ten adres zostanie wysłany e-mail z linkiem do aktywacji konta i również później będziemy korzystali z tego adresu do kontaktu z Tobą.</strong></p>
 			</li>
-			<li>
-				<p>Adres zameldowania:</p>
-				<p>Jest to adres wpisany w Twoim dokumencie tożsamości.</p>
-				<ul>
-					<li {if $error_fields.h_street}class="error"{/if}> <label>Ulica</label><input type="text" name="fields[h_street]" value="{$values.h_street}" /></li>
-					<li {if $error_fields.h_building}class="error"{/if}> <label>Nr domu</label><input type="text" name="fields[h_building]" value="{$values.h_building}" /></li>
-					<li {if $error_fields.h_loc}class="error"{/if}> <label>Nr mieszkania</label><input type="text" name="fields[h_loc]" value="{$values.h_loc}" /></li>
-					<li {if $error_fields.h_city}class="error"{/if}><label>Miejscowość</label><input type="text" name="fields[h_city]" value="{$values.h_city}" /></li>
-					<li {if $error_fields.h_city}class="error"{/if}><label>Kod pocztowy</label><input type="text" name="fields[h_zip]" value="{$values.h_zip}" /></li>
-				</ul>
-			</li>
-			<li {if $error_fields.school_address}class="error"{/if}><label>Nazwa i adres szkoły/uczelni/zakładu pracy:</label><textarea name="fields[school_address]">{$values.school_address}</textarea>
-			</li>
-			<li {if $error_fields.birth_date}class="error"{/if}><label>data urodzenia:</label><input type="text" value="{$values.birth_date}" class="jq_date" name="fields[birth_date]" /> (RRRR-MM-DD)
+<li {if $error_fields.birth_date}class="error"{/if}><label>data urodzenia:</label><input type="text" value="{$values.birth_date}" class="jq_date" name="fields[birth_date]" /> (RRRR-MM-DD)
 			<p><strong>Oświadczenie rodzica / opiekuna osoby niepełnoletniej można pobrać pod adresem: <a href="http://sew.wosp.wroc.pl/zgoda.pdf">http://sew.wosp.wroc.pl/zgoda.pdf</a></strong></p>
 			</li>
 			<li {if $error_fields.PESEL}class="error"{/if}><label>PESEL:</label><input type="text" value="{$values.PESEL}" name="fields[PESEL]" />
@@ -50,6 +37,31 @@
 				<p>Pamiętaj też, by ten dokument zabrać na późniejsze spotkanie z nami.</p>
 			</li>
 			<li {if $error_fields.doc_id}class="error"{/if}><label>Numer dokumentu tożsamości:</label><input type="text" value="{$values.doc_id}" name="fields[doc_id]" />
+			
+			<li>
+				<p><b>Adres zameldowania:</b></p>
+				<p>Jest to adres wpisany w Twoim dokumencie tożsamości.</p>
+				<ul>
+					<li {if $error_fields.h_street}class="error"{/if}> <label>Ulica</label><input type="text" name="fields[h_street]" value="{$values.h_street}" /></li>
+					<li {if $error_fields.h_building}class="error"{/if}> <label>Nr domu</label><input type="text" name="fields[h_building]" value="{$values.h_building}" /></li>
+					<li {if $error_fields.h_loc}class="error"{/if}> <label>Nr mieszkania</label><input type="text" name="fields[h_loc]" value="{$values.h_loc}" /></li>
+					<li {if $error_fields.h_city}class="error"{/if}><label>Miejscowość</label><input type="text" name="fields[h_city]" value="{$values.h_city}" /></li>
+					<li {if $error_fields.h_city}class="error"{/if}><label>Kod pocztowy</label><input type="text" name="fields[h_zip]" value="{$values.h_zip}" /></li>
+				</ul>
+				<hr>
+			</li>
+			<li>
+				<p><b>Dane Szkoły/uczelni/zakładu pracy:</b></p>
+				<ul>
+					<li {if $error_fields.school_name}class="error"{/if}> <label>Nazwa</label><input type="text" name="fields[school_name]" value="{$values.school_name}" /></li>
+					<li {if $error_fields.school_street}class="error"{/if}> <label>Ulica</label><input type="text" name="fields[school_street]" value="{$values.school_street}" /></li>
+					<li {if $error_fields.school_building}class="error"{/if}> <label>Nr domu</label><input type="text" name="fields[school_building]" value="{$values.school_building}" /></li>
+					<li {if $error_fields.school_loc}class="error"{/if}> <label>Nr mieszkania</label><input type="text" name="fields[school_loc]" value="{$values.school_loc}" /></li>
+					<li {if $error_fields.school_city}class="error"{/if}><label>Miejscowość</label><input type="text" name="fields[school_city]" value="{$values.school_city}" /></li>
+					<li {if $error_fields.school_city}class="error"{/if}><label>Kod pocztowy</label><input type="text" name="fields[school_zip]" value="{$values.school_zip}" /></li>					
+				</ul>
+				<hr>
+			</li>
 			
 			<li {if $error_fields.login}class="error"{/if}><label>login:</label><input type="text" value="{$values.login}" name="fields[login]" />
 				{$login_unique_error}
