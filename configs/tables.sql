@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   `doc_id` varchar(45) NOT NULL DEFAULT '0' COMMENT 'numer dokumentu tożsamości',
   `doc_type` enum('legitymacja szkolna','legitymacja studencka','dowód osobisty','paszport','karta stałego pobytu','prawo jazdy','książeczka wojskowa','inne') NOT NULL,
   `ACL` varchar(200) NOT NULL DEFAULT 'a:7:{s:4:"self";i:1;s:4:"view";i:0;s:7:"notices";i:0;s:4:"edit";i:0;s:6:"a_edit";i:0;s:5:"admin";i:0;s:10:"superadmin";i:0;}' COMMENT 'zserializowana tablica zawierająca listę operacji jakie dany użyszkodnik może wykonać',
-  `type` enum('ppatrol','sztab','zaufany','czarna lista','nie dotyczy','zakwalifikowany na finał') DEFAULT 'nie dotyczy',
+  `type` enum('ppatrol','sztab','zaufany','czarna lista','nie dotyczy','zakwalifikowany na finał', 'dane w systemie fundacyjnym (zakwalifikowany na finał)') DEFAULT 'nie dotyczy',
   `token` varchar(45) NOT NULL DEFAULT '0' COMMENT 'token do potwierdzenia maila',
   `deleted` binary(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),

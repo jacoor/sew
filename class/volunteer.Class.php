@@ -33,7 +33,7 @@ final class volunteer extends genericClass implements PHPSucks{
 	private $active 								;
 	private $doc_id 								;
 	private $doc_type 							; //enum: available: legitymacja szkolna, legitymacja studencka, dowód osobisty, paszport, karta stałego pobytu, pravo jazdy, książeczka wojskowa, inne.
-	private $type 									; //enum : available: ppatrol, sztab, zaufany, czarna lista, nie dotyczy, zakwalifikowany na finał
+	private $type 									; //enum : available: ppatrol, sztab, zaufany, czarna lista, nie dotyczy, zakwalifikowany na finał, dane w systemie fundacyjnym (zakwalifikowany na finał)
 	private $token 									; //token for email address checking
 	private $deleted						=	 0; //is user deleted?
 	private $notices 						= array(); //array of notice objects related to this user 
