@@ -699,5 +699,18 @@ class displayManager extends smarty{
 			$this->display('change_user_data_form.html');
 		}
 	}
+
+	/**
+	 * list all meetings
+	 * @return void
+	 */
+	public function meetings(){
+		$this->secure('admin');
+		$meetings = $this->engine->loadMeetings(null, null);
+		//echo ('<pre>');
+		//var_dump($meetings[0]->persons_limit); die;
+		$this->assign_by_ref('meetings',$meetings);
+		$this->display('meetings.html');
+	}
 }
 ?>

@@ -1,0 +1,25 @@
+{include file="layout/header.html"}
+{if $user->ACL_check('admin')}
+<h3>Zajętość terminów rekrutacji</h3>
+<p>Zmiana parametrów terminu rekrutacji możliwa niestety tylko przez bazę danych.</p>
+<p class="legend">legenda:</p>
+<ul class="legend">
+	<li class="full">Pełny termin</li>
+</ul>
+{if $meetings}
+	<table border="1" summary="Zajętość terminów rekrutacji" width="100%" id="allVolunteers">
+		<tr><th>Data</th><th>Godzina</th><th>Limit</th><th>Ilość zarejestrowanych</th></tr>
+	  {foreach from=$meetings item="m"}
+		<tr class="{if $m->persons_limit==$m->r_amount} full {/if}" >
+			<td>{$m->date}</td>
+			<td>{$m->time}</td>
+			<td>{$m->persons_limit}</td>
+			<td>{$m->r_amount}</td>
+		</tr>
+		{/foreach}
+	</table>
+{/if}
+{else}
+	<h2 class="error">Brak uprawnień.</h2>
+{/if}
+{include file="layout/footer.html"}
