@@ -565,7 +565,8 @@ class displayManager extends smarty{
 													'sztab'=>1,
 													'zaufany'=>1,
 													'czarna lista'=>1,
-													'zakwalifikowany na finał'=>1
+													'zakwalifikowany na finał'=>1,
+													'dane w systemie fundacyjnym (zakwalifikowany na finał)' => 1,
 													);
 		$correct = true;
 		if ($data['active']!=1) $data['active']=0;

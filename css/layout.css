@@ -45,6 +45,10 @@ input.error, textarea.error{
 	background:blue;
 	color:#fff !important;
 }
+.naFinaleDanewFundacji, .naFinaleDanewFundacji a{
+	background:#0066ff;
+	color:#fff !important;
+}
 .legend{
 	margin:0;
 	padding:0;
