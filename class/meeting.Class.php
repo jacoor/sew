@@ -12,6 +12,7 @@ final class meeting extends genericClass implements PHPSucks{
 	private $persons_limit 		=	30 ;
 	private $r_amount = 0;
 	private $deleted = 0;
+	private $active = 0;
 	protected $engine;
 	
 	/**

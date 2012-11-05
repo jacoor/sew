@@ -103,7 +103,7 @@ final class EngineClass{
 	 * @return array
 	 */
 	public function loadMeetings(){
-		$ar = $this->db->getRows(self::$table_names['meeting'],null,null,'date asc, time asc');
+		$ar = $this->db->getRows(self::$table_names['meeting'],array('active'=>1),null,'date asc, time asc');
 		if ($ar){
 			foreach ($ar as $val)
 				$result[] = new meeting($this,$val);

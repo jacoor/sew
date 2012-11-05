@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 02 Lis 2012, 17:00
+-- Czas wygenerowania: 05 Lis 2012, 22:57
 -- Wersja serwera: 5.5.24
 -- Wersja PHP: 5.3.10-1ubuntu3.4
 
@@ -37,8 +37,9 @@ CREATE TABLE IF NOT EXISTS `meetings` (
   `persons_limit` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'limit ludków na dany termin',
   `r_amount` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'ilu juz sie zglosilo\n',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='terminy rekrutacji' AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='terminy rekrutacji' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `notices` (
   PRIMARY KEY (`id`),
   KEY `vid` (`vid`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='zdarzenia dotyczące wolontariuszy' AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='zdarzenia dotyczące wolontariuszy' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -102,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   `doc_id` varchar(45) NOT NULL DEFAULT '0' COMMENT 'numer dokumentu tożsamości',
   `doc_type` enum('legitymacja szkolna','legitymacja studencka','dowód osobisty','paszport','karta stałego pobytu','prawo jazdy','książeczka wojskowa','inne') NOT NULL,
   `ACL` varchar(200) NOT NULL DEFAULT 'a:7:{s:4:"self";i:1;s:4:"view";i:0;s:7:"notices";i:0;s:4:"edit";i:0;s:6:"a_edit";i:0;s:5:"admin";i:0;s:10:"superadmin";i:0;}' COMMENT 'zserializowana tablica zawierająca listę operacji jakie dany użyszkodnik może wykonać',
-  `type` enum('ppatrol','sztab','zaufany','czarna lista','nie dotyczy','zakwalifikowany na finał', 'dane w systemie fundacyjnym (zakwalifikowany na finał)') DEFAULT 'nie dotyczy',
+  `type` enum('ppatrol','sztab','zaufany','czarna lista','nie dotyczy','zakwalifikowany na finał','dane w systemie fundacyjnym (zakwalifikowany na finał)') DEFAULT 'nie dotyczy',
   `token` varchar(45) NOT NULL DEFAULT '0' COMMENT 'token do potwierdzenia maila',
   `deleted` binary(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -110,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   UNIQUE KEY `PESEL` (`PESEL`),
   UNIQUE KEY `email` (`email`),
   KEY `name` (`surname`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=94 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=96 ;
 
 --
 -- Ograniczenia dla zrzutów tabel
