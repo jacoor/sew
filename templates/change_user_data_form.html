@@ -5,7 +5,7 @@
 {/if}
 {if $user->ACL_check('edit')}
 	<form id="register" action="/index.php" method="post">
-		<fieldset>
+		<fieldset>{debug}
 		{if $smarty.post.fields}
 			{assign var="values" value=$smarty.post.fields}
 		{/if}

@@ -163,11 +163,11 @@ class displayManager extends smarty{
 								'h_building',
 								//'h_loc',
 								'school_name',
-								'school_street',
-								'school_building',
+								//'school_street',
+								//'school_building',
 								//'school_loc',
-								'school_city',
-								'school_zip',
+								//'school_city',
+								//'school_zip',
 								'birth_date',
 								'PESEL',
 								'phone',
@@ -246,7 +246,7 @@ class displayManager extends smarty{
 			$correct = false;
 		}
 
-		if (!validator::check_zip($data['school_zip'])){
+		if (!empty($data['school_zip']) && !validator::check_zip($data['school_zip'])){
 			$error_fields['school_zip'] = true;
 			$correct = false;
 		}
@@ -534,13 +534,13 @@ class displayManager extends smarty{
 								'h_zip',
 								'h_street',
 								'h_building',
-								'h_loc',
+								//'h_loc',
 								'school_name',
-								'school_street',
-								'school_building',
-								'school_loc',
-								'school_city',
-								'school_zip',
+								//'school_street',
+								//'school_building',
+								//'school_loc',
+								//'school_city',
+								//'school_zip',
 								'birth_date',
 								'PESEL',
 								'phone',
@@ -633,7 +633,7 @@ class displayManager extends smarty{
 			$correct = false;
 		}
 
-		if (!validator::check_zip($data['school_zip'])){
+		if (!empty($data['school_zip']) && !validator::check_zip($data['school_zip'])){
 			$error_fields['school_zip'] = true;
 			$correct = false;
 		}
