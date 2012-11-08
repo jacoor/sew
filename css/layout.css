@@ -25,7 +25,7 @@ input.error, textarea.error{
 	text-decoration:underline;
 }
 
-.czarnaLista, .czarnaLista a{
+.czarnaLista, .czarnaLista a, .m_past, .m_past.m_active{
 	background:#000;
 	color:#fff !important;
 }
@@ -33,7 +33,7 @@ input.error, textarea.error{
 	background:red;
 	color:#000;
 }
-.sztab, .sztab a{
+.sztab, .sztab a, .m_active{
 	background:yellow;
 	color:#000;
 }

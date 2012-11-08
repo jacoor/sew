@@ -707,8 +707,10 @@ class displayManager extends smarty{
 	public function meetings(){
 		$this->secure('admin');
 		$meetings = $this->engine->loadMeetings(null, null);
+		$next_day = date('Y/m/d', strtotime('+ 1 day'));
 		//echo ('<pre>');
 		//var_dump($meetings[0]->persons_limit); die;
+		$this->assign_by_ref('next_day',$next_day);
 		$this->assign_by_ref('meetings',$meetings);
 		$this->display('meetings.html');
 	}

@@ -4,17 +4,20 @@
 <p>Zmiana parametrów terminu rekrutacji możliwa niestety tylko przez bazę danych.</p>
 <p class="legend">legenda:</p>
 <ul class="legend">
+	<li class="m_active">Termin aktywny (można się na niego rejestrować)</li>
 	<li class="full">Pełny termin</li>
+	<li class="m_past">Przeszły termin(rejestracja zamknięta)</li>
 </ul>
 {if $meetings}
-	<table border="1" summary="Zajętość terminów rekrutacji" width="100%" id="allVolunteers">
-		<tr><th>Data</th><th>Godzina</th><th>Limit</th><th>Ilość zarejestrowanych</th></tr>
+	<table border="1" summary="Zajętość terminów rekrutacji" width="100%" id="meetings">
+		<tr><th>Data</th><th>Godzina</th><th>Limit</th><th>Ilość zarejestrowanych</th><th>Aktywny?</th></tr>
 	  {foreach from=$meetings item="m"}
-		<tr class="{if $m->persons_limit==$m->r_amount} full {/if}" >
+		<tr class="{if $m->persons_limit==$m->r_amount} full {/if} {if $m->active && !($m->persons_limit==$m->r_amount)} m_active{/if} {if $m->date|date_format:'%Y/%M/%D' < $next_day|date_format:'%Y/%M/%D'} m_past{/if}" >
 			<td>{$m->date}</td>
 			<td>{$m->time}</td>
 			<td>{$m->persons_limit}</td>
 			<td>{$m->r_amount}</td>
+			<td>{if $m->active}tak{else}nie {/if}</td>
 		</tr>
 		{/foreach}
 	</table>
