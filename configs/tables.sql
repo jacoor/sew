@@ -1,26 +1,18 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
+-- version 3.2.5
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Czas wygenerowania: 05 Lis 2012, 22:57
--- Wersja serwera: 5.5.24
--- Wersja PHP: 5.3.10-1ubuntu3.4
+-- Host: mysql2.icenter.pl
+-- Czas wygenerowania: 09 Lis 2012, 00:46
+-- Wersja serwera: 5.1.51
+-- Wersja PHP: 5.2.13
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT=0;
 START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
--- Baza danych: `sew`
+-- Baza danych: `sew_wosp`
 --
 
 -- --------------------------------------------------------
@@ -39,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `meetings` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='terminy rekrutacji' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='terminy rekrutacji' AUTO_INCREMENT=38 ;
 
 -- --------------------------------------------------------
 
@@ -66,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `notices` (
   PRIMARY KEY (`id`),
   KEY `vid` (`vid`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='zdarzenia dotyczące wolontariuszy' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='zdarzenia dotyczące wolontariuszy' AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -94,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   `school_zip` varchar(6) NOT NULL COMMENT 'kod pocztowy xx-xxx',
   `school_city` varchar(255) NOT NULL COMMENT 'Miasto',
   `birth_date` date NOT NULL COMMENT '''typ zmiennej date''',
-  `PESEL` bigint(11) NOT NULL,
+  `PESEL` varchar(11) NOT NULL,
   `phone` varchar(45) DEFAULT NULL COMMENT '''numer kontaktowy''',
   `p_phone` varchar(45) DEFAULT NULL COMMENT '''numer do rodzica''',
   `r_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '''data rejestracji''',
@@ -111,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   UNIQUE KEY `PESEL` (`PESEL`),
   UNIQUE KEY `email` (`email`),
   KEY `name` (`surname`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=96 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=121 ;
 
 --
 -- Ograniczenia dla zrzutów tabel
@@ -122,9 +114,4 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
 --
 ALTER TABLE `notices`
   ADD CONSTRAINT `notices_ibfk_1` FOREIGN KEY (`vid`) REFERENCES `volunteers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
