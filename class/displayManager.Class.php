@@ -44,8 +44,8 @@ class displayManager extends smarty{
 	 */
 	public function default_action($login_error=false){
 		if ($this->engine->session->isLoggedIn()){
-			$this->assign_by_ref('user', $this->engine->session->getUser());
-			$notices = $this->engine->session->getUser()->getNotices();
+			$this->assign_by_ref('user', $this->user);
+			$notices = $this->user->getNotices();
 			if ($notices) {
 				foreach ($notices as $k => $n){
 					if ($n->type_of=="spotkanie"){
@@ -70,7 +70,7 @@ class displayManager extends smarty{
 	 * @return unknown_type
 	 */
 	private function secure($privilege){
-		if (!$this->engine->session->getUser()->ACL_check($privilege)){
+		if (!$this->user->ACL_check($privilege)){
 			$this->display('security_alert.html');
 			session_destroy();
 			die;
@@ -112,11 +112,11 @@ class displayManager extends smarty{
 	public function add_volunteer_to_meeting($data){
 		$this->secure('self');
 		$meeting =  $this->engine->loadMeeting($data['m_id']);
-		$notice = $this->engine->loadNoticeRelatedToMeetingAndVolunteer($meeting->id, $this->engine->session->getUser()->id);
+		$notice = $this->engine->loadNoticeRelatedToMeetingAndVolunteer($meeting->id, $this->user->id);
 		if (!$notice){
 			$meeting->r_amount = $meeting->r_amount+1;
 			$array = array(
-										'vid' 						=> 		$this->engine->session->getUser()->id,
+										'vid' 						=> 		$this->user->id,
 										'type_of' 				=> 		'spotkanie',
 										'mid' 						=> 		$meeting->id,
 										'm_date' 					=> 		$meeting->date.' '.$meeting->time,
@@ -126,7 +126,7 @@ class displayManager extends smarty{
 			$notice  = new notice($this->engine, $array);
 			$this->assign_by_ref('meeting', $meeting);
 			$msg = $this->fetch('emails/mail_confirm_meeting.html');
-			$res = $this->engine->sendMail($msg,$msg,'Wiadomość z Systemu Ewidencji Wolontariuszy Wrocławskiego Sztabu WOŚP',$this->engine->session->getUser()->email);
+			$res = $this->engine->sendMail($msg,$msg,'Wiadomość z Systemu Ewidencji Wolontariuszy Wrocławskiego Sztabu WOŚP',$this->user->email);
 			$this->display('confirm_meeting.html');
 		}else{
 			$this->display('already_registered_for_meeting.html');
@@ -688,7 +688,7 @@ class displayManager extends smarty{
 			 		$ACL = $this->engine->loadVolunteers(array('id'=> $data['id']), array('ACL','id'));
 			 		$data['ACL'] = $ACL[0]->ACL;
 				}
-			if ($this->engine->session->getUser()->ACL_check('admin')){
+			if ($this->user->ACL_check('admin')){
 				if($data['active']!=1){
 					$data['active']==0;
 				}
