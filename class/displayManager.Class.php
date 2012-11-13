@@ -12,6 +12,7 @@ require_once	$_SERVER['DOCUMENT_ROOT'].'/pear/HTTP.php';
 class displayManager extends smarty{
 	public $engine;
 	private $site_root;
+	private $user = false;
 
 	public function __construct(){
 		parent::Smarty();
@@ -30,8 +31,10 @@ class displayManager extends smarty{
 		) ;
 
 		$this->assign('site_root', $this->site_root);
-		if ($this->engine->session->isLoggedIn())
-			$this->assign_by_ref('user', $this->engine->session->getUser());
+		if ($this->engine->session->isLoggedIn()){
+			$this->user = $this->engine->session->getUser();
+			$this->assign_by_ref('user', $this->user);
+		}
 	}
 
 	/**
@@ -519,7 +522,7 @@ class displayManager extends smarty{
 		$this->secure('edit');
 		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
 		$values = $volunteer[0]->get();
-		$values['token'] = sha1($values['id'].$values['password']);
+		$values['token'] = sha1($values['id'].$this->user->id);
 		$this->assign_by_ref('values',$values);
 		$this->display('change_user_data_form.html');
 	}
@@ -667,7 +670,7 @@ class displayManager extends smarty{
 		#var_dump(new volunteer($this->engine,$data));die();
 		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
 		$volunteer = $volunteer[0]->get();
-		$token = sha1($volunteer['id'].$volunteer['password']);
+		$token = sha1($volunteer['id'].$this->user->id);
 		if ($token !== $data['token'] ){
 			$this->display('security_alert.html');
 			session_destroy();
