@@ -3,10 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: mysql2.icenter.pl
--- Czas wygenerowania: 09 Lis 2012, 00:46
+-- Czas wygenerowania: 18 Lis 2012, 20:00
 -- Wersja serwera: 5.1.51
 -- Wersja PHP: 5.2.13
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT=0;
 START TRANSACTION;
@@ -31,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `meetings` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='terminy rekrutacji' AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='terminy rekrutacji' AUTO_INCREMENT=42 ;
 
 -- --------------------------------------------------------
 
@@ -58,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `notices` (
   PRIMARY KEY (`id`),
   KEY `vid` (`vid`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='zdarzenia dotyczące wolontariuszy' AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='zdarzenia dotyczące wolontariuszy' AUTO_INCREMENT=41 ;
 
 -- --------------------------------------------------------
 
@@ -74,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   `login` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `email` varchar(45) DEFAULT NULL,
+  `photo` varchar(255) NOT NULL,
   `h_street` varchar(100) NOT NULL COMMENT 'Ulica zamieszkania',
   `h_building` varchar(20) NOT NULL COMMENT 'numer budynku',
   `h_loc` varchar(20) DEFAULT NULL COMMENT 'numer mieszkania',
@@ -103,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   UNIQUE KEY `PESEL` (`PESEL`),
   UNIQUE KEY `email` (`email`),
   KEY `name` (`surname`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=121 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=176 ;
 
 --
 -- Ograniczenia dla zrzutów tabel
@@ -114,4 +116,5 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
 --
 ALTER TABLE `notices`
   ADD CONSTRAINT `notices_ibfk_1` FOREIGN KEY (`vid`) REFERENCES `volunteers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

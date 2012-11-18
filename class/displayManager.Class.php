@@ -174,7 +174,7 @@ class displayManager extends smarty{
 			}
 			return  array(
 				'file' => $filename,
-				'status' => $saved,
+				'saved' => $saved,
 				'error' => $error
 			);
 		}
@@ -324,7 +324,7 @@ class displayManager extends smarty{
 		
 		if ($correct){
 			$photo = $this->save_photo($data['PESEL'].'.jpg');
-			if (!$photo['status']){
+			if ($photo['saved']){
 				$data['photo'] = $data['PESEL'].'.jpg';
 			}else{
 				$correct= false;

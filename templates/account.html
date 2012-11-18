@@ -2,6 +2,10 @@
 <h3>Twój profil</h3>
 <table border="0" summary="Dane wolontariusza {$user->name} {$user->surname}">
 	<tr>
+		<th>Zdjęcie:	</th>
+		<td><a class="fancybox" href="/photos/{$user->photo}"><img src="/photos/{$user->photo}" height="100" /></a></td>
+	</tr>
+	<tr>
 		<th>Imię:	</th>
 		<td>{$user->name}</td>
 	</tr>

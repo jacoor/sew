@@ -23,6 +23,14 @@ var sew = {
 		$(this).parent().parent().parent().parent().parent().html('<p>Wczytuję dane</p>').load($(this).attr('href')+'&ajax=1').fadeIn(1000);
 	});
 	
+	$("a.fancybox").fancybox({
+		'transitionIn'	:	'elastic',
+		'transitionOut'	:	'elastic',
+		'speedIn'		:	600, 
+		'speedOut'		:	200, 
+		'overlayShow'	:	false
+	});
+	
 },
 	
 	notice_create : function(){
