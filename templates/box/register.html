@@ -1,4 +1,4 @@
-	<form id="register" action="/index.php" method="post">
+	<form id="register" action="/index.php" enctype="multipart/form-data" method="post">
 		<fieldset>
 		{assign var="values" value=$smarty.post.fields}
 		{$register_error}
@@ -10,6 +10,12 @@
 			<li {if $error_fields.email}class="error"{/if}><label>E-mail:</label><input type="text" value="{$values.email}" name="fields[email]" />
 				{$email_unique_error}
 			<p><strong>Prosimy o podawanie prawdziwych adresów e-mail. Po wypełnieniu formularza na ten adres zostanie wysłany e-mail z linkiem do aktywacji konta i również później będziemy korzystali z tego adresu do kontaktu z Tobą.</strong></p>
+			</li>
+			<li {if $error_fields.photo}class="error"{/if}><label>Zdjęcie:</label><input type="file" value="" name="fields[photo]" />
+				<p><strong>Dodaj zdjęcie, które chcesz żeby było na identyfikatorze. Ma to być oczywiście zdjęcie twarzy, takie żeby można Cię było na nim rozpoznać. <br>
+					Maksymalny rozmiar pliku ze zdjęciem: 2MB.
+					<br> Jeśli nie masz zdjęcia w formie elektronicznej, bez obaw, zdjęcie zrobimy podczas spotkania. 
+				</strong></p>
 			</li>
 <li {if $error_fields.birth_date}class="error"{/if}><label>data urodzenia:</label><input type="text" value="{$values.birth_date}" class="jq_date" name="fields[birth_date]" /> (RRRR-MM-DD)
 			<p><strong>Oświadczenie rodzica / opiekuna osoby niepełnoletniej można pobrać pod adresem: <a href="http://sew.wosp.wroc.pl/zgoda.pdf">http://sew.wosp.wroc.pl/zgoda.pdf</a></strong></p>

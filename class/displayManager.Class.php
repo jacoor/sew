@@ -269,6 +269,14 @@ class displayManager extends smarty{
 		if (validator::check_onlyalphabetical($data['password'] || strlen($data['password'])<6)){
 			$this->assign('pass_error','<p class="error">Wprowadzone hasło jest niepoprawne. Hasło musi być dłuższe niż 6 znaków i posiadać przynajmniej jedną cyfrę.</p>');
 		}
+		
+		//photo upload stuff
+		//validate file
+		if ($_FILES['fields']['name']['photo']){
+			if ($_FILES['fields']['type']['photo'] == config::required_photo_type){
+				die('dobrze!');
+			}
+		}
 
 		//check if user with thist data already exist
 

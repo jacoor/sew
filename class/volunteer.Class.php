@@ -13,6 +13,7 @@ final class volunteer extends genericClass implements PHPSucks{
 	private $login 									;
 	private $password 							;
 	private $email 									;
+	private $photo;
 	private $h_street 							;
 	private $h_building 							;
 	private $h_loc 							;
