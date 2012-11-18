@@ -59,8 +59,9 @@ class displayManager extends smarty{
 			}
 			$this->display('account.html');
 		}else{
-			if ($login_error)
-				$this->assign('login_error','<h2>logowanie niepoprawne</h2>');
+			if ($login_error){
+					$this->assign('login_error','<h2>logowanie niepoprawne</h2>');
+				}
 			$this->display('index.html');
 		}
 	}
@@ -142,7 +143,7 @@ class displayManager extends smarty{
 	 */
 	public function login($data){
 		$this->engine->session->login($data['fields']['username'], $data['fields']['password']);
-		$this->default_action(true);
+		HTTP::redirect('/');
 	}
 
 	public function logout(){
