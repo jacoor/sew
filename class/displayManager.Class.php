@@ -285,7 +285,7 @@ class displayManager extends smarty{
 				}
 				$saved = $image->writeImage($_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$data['PESEL'].'.jpg');
 				if (!$saved){
-					$file_error = 'Plik nie został zapisany!!';
+					$file_error = 'Plik nie został zapisany!';
 					$correct =  false;
 					$error_fields['photo'] = true;
 					$this->assign('file_error',$file_error);
