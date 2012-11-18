@@ -3,7 +3,7 @@
 <table border="0" summary="Dane wolontariusza {$user->name} {$user->surname}">
 	<tr>
 		<th>Zdjęcie:	</th>
-		<td><a class="fancybox" href="/photos/{$user->photo}"><img src="/photos/{$user->photo}" height="100" /></a></td>
+		<td>{include file="box/photo.html" }</td>
 	</tr>
 	<tr>
 		<th>Imię:	</th>
