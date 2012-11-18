@@ -150,6 +150,37 @@ class displayManager extends smarty{
 		$this->default_action();
 	}
 	/**
+	 * Resizes the photo to dimensions set in config
+	 * @return file name/false
+	 */
+	private function save_photo($filename){
+		//photo upload stuff
+		//validate file
+		if ($_FILES['fields']['name']['photo']){
+			if ($_FILES['fields']['type']['photo'] == config::required_photo_type() && $_FILES['fields']['size']['photo'] <= config::photo_max_size()){
+				//var_dump($_FILES); die();
+				//resize 
+				$image = new Imagick( $_FILES['fields']['tmp_name']['photo'] );
+				$imageprops = $image->getImageGeometry();
+				if ($imageprops['width'] <= config::photo_width() && $imageprops['height'] <= config::photo_height()) {
+					// don't upscale
+				} else {
+					$image->resizeImage(config::photo_width(),config::photo_height(), imagick::FILTER_LANCZOS, 0.9, true);
+				}
+				$saved = $image->writeImage($_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$filename);
+				if (!$saved){
+					$error = 'Plik nie został zapisany!';
+				}
+			}
+			return  array(
+				'file' => $filename,
+				'status' => $saved,
+				'error' => $error
+			);
+		}
+	}
+	
+	/**
 	 * registers new volunteer
 	 * @param $data volunteer data
 	 * @return void
@@ -270,31 +301,6 @@ class displayManager extends smarty{
 			$this->assign('pass_error','<p class="error">Wprowadzone hasło jest niepoprawne. Hasło musi być dłuższe niż 6 znaków i posiadać przynajmniej jedną cyfrę.</p>');
 		}
 		
-		//photo upload stuff
-		//validate file
-		if ($_FILES['fields']['name']['photo']){
-			if ($_FILES['fields']['type']['photo'] == config::required_photo_type() && $_FILES['fields']['size']['photo'] <= config::photo_max_size()){
-				//var_dump($_FILES); die();
-				//resize 
-				$image = new Imagick( $_FILES['fields']['tmp_name']['photo'] );
-				$imageprops = $image->getImageGeometry();
-				if ($imageprops['width'] <= config::photo_width() && $imageprops['height'] <= config::photo_height()) {
-					// don't upscale
-				} else {
-					$image->resizeImage(config::photo_width(),config::photo_height(), imagick::FILTER_LANCZOS, 0.9, true);
-				}
-				$saved = $image->writeImage($_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$data['PESEL'].'.jpg');
-				if (!$saved){
-					$file_error = 'Plik nie został zapisany!';
-					$correct =  false;
-					$error_fields['photo'] = true;
-					$this->assign('file_error',$file_error);
-				}
-			}else{
-				$correct =  false;
-				$error_fields['photo'] = true;
-			}
-		}
 
 		//check if user with thist data already exist
 
@@ -313,6 +319,17 @@ class displayManager extends smarty{
 					$error_fields[$key] = true;
 					$this->assign($key.'_unique_error','<p class="error">Ten '.$errors[$key].' już istnieje w naszej bazie. Prawdopodobnie jesteś już zarejestrowany/a więc skorzystaj z formularza logowania (jeśli nie pamiętasz hasła to zostanie wygenerowane nowe). Jeśli mimo wszytko masz problemy - skontaktuj się z nami.</p>');
 				}
+			}
+		}
+		
+		if ($correct){
+			$photo = $this->save_photo($data['PESEL'].'.jpg');
+			if (!$photo['status']){
+				$data['photo'] = $data['PESEL'].'.jpg';
+			}else{
+				$correct= false;
+				$error_fields['photo'] = true;
+				$this->assign('file_error', $photo['error']);
 			}
 		}
 		if($correct){
