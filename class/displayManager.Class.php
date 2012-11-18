@@ -5,7 +5,7 @@
 require_once	$_SERVER['DOCUMENT_ROOT'].'/class/engine.Class.php';
 require_once	$_SERVER['DOCUMENT_ROOT'].'/class/validator.class.php';
 require_once	$_SERVER['DOCUMENT_ROOT'].'/pear/smarty/Smarty.class.php';
-require_once ($_SERVER['DOCUMENT_ROOT'].'/configs/config.php');
+require_once    $_SERVER['DOCUMENT_ROOT'].'/configs/config.php';
 require_once	$_SERVER['DOCUMENT_ROOT'].'/pear/HTTP.php';
 
 
@@ -273,8 +273,8 @@ class displayManager extends smarty{
 		//photo upload stuff
 		//validate file
 		if ($_FILES['fields']['name']['photo']){
-			if ($_FILES['fields']['type']['photo'] == config::required_photo_type){
-				die('dobrze!');
+			if ($_FILES['fields']['type']['photo'] == config::required_photo_type()){
+				var_dump($_FILES); die();
 			}
 		}
 
