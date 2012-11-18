@@ -12,8 +12,11 @@
 			<p><strong>Prosimy o podawanie prawdziwych adresów e-mail. Po wypełnieniu formularza na ten adres zostanie wysłany e-mail z linkiem do aktywacji konta i również później będziemy korzystali z tego adresu do kontaktu z Tobą.</strong></p>
 			</li>
 			<li {if $error_fields.photo}class="error"{/if}><label>Zdjęcie:</label><input type="file" value="" name="fields[photo]" />
+				{if $file_error}
+					<p class="error"><strong>{$file_error }</strong></p>
+				{/if}
 				<p><strong>Dodaj zdjęcie, które chcesz żeby było na identyfikatorze. Ma to być oczywiście zdjęcie twarzy, takie żeby można Cię było na nim rozpoznać. <br>
-					Maksymalny rozmiar pliku ze zdjęciem: 2MB.
+					Maksymalny rozmiar pliku ze zdjęciem: 2MB, format jpg.
 					<br> Jeśli nie masz zdjęcia w formie elektronicznej, bez obaw, zdjęcie zrobimy podczas spotkania. 
 				</strong></p>
 			</li>

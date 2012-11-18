@@ -273,8 +273,26 @@ class displayManager extends smarty{
 		//photo upload stuff
 		//validate file
 		if ($_FILES['fields']['name']['photo']){
-			if ($_FILES['fields']['type']['photo'] == config::required_photo_type()){
-				var_dump($_FILES); die();
+			if ($_FILES['fields']['type']['photo'] == config::required_photo_type() && $_FILES['fields']['size']['photo'] <= config::photo_max_size()){
+				//var_dump($_FILES); die();
+				//resize 
+				$image = new Imagick( $_FILES['fields']['tmp_name']['photo'] );
+				$imageprops = $image->getImageGeometry();
+				if ($imageprops['width'] <= config::photo_width() && $imageprops['height'] <= config::photo_height()) {
+					// don't upscale
+				} else {
+					$image->resizeImage(config::photo_width(),config::photo_height(), imagick::FILTER_LANCZOS, 0.9, true);
+				}
+				$saved = $image->writeImage($_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$data['PESEL'].'.jpg');
+				if (!$saved){
+					$file_error = 'Plik nie został zapisany!!';
+					$correct =  false;
+					$error_fields['photo'] = true;
+					$this->assign('file_error',$file_error);
+				}
+			}else{
+				$correct =  false;
+				$error_fields['photo'] = true;
 			}
 		}
 
