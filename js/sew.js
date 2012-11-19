@@ -30,7 +30,7 @@ var sew = {
 		'speedOut'		:	200, 
 		'overlayShow'	:	false
 	});
-	
+	this.register_form_check();
 },
 	
 	notice_create : function(){
@@ -212,8 +212,22 @@ var sew = {
 			$('.text_value', node).each(function(){sew.shower(this)});
 			break;
 		}
+	},
+	photo_check : function(){
+		if ($('input[type=file]').val()==''){
+			return confirm('Nie zostało dodane zdjęcie. Czy jesteś pewien/a że chcesz kontynuować?');
+		}
+		return true;
+	},
+	
+	register_form_check : function(){
+		var T = this;
+		$('#register').submit(function(e){
+			if (!T.photo_check()){
+				e.preventDefault();
+			}
+		});
 	}
-
 }
 
 
