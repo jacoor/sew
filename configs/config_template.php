@@ -20,6 +20,13 @@ final class config{
 	private static $mail_port="";//int
 	private static $mail_auth=""; //bolean
 	private static $finalNr = '17';
+	
+	private static $required_photo_type = 'image/jpeg';
+	private static $photo_width = 800;
+	private static $photo_height = 400;
+	private static $photo_max_size = 2097152; //2 MB
+	
+	private static $photo_save_path = '/photos/';
 		
 	public static function hostname(){
 		return self::$hostname;
@@ -71,6 +78,26 @@ final class config{
 	
 	public static function finalNr(){
 		return self::$finalNr;
+	}
+	
+	public static function required_photo_type(){
+			return self::$required_photo_type;
+	}
+	
+	public static function photo_width(){
+			return self::$photo_width;
+	}
+	
+	public static function photo_height(){
+			return self::$photo_height;
+	}
+	
+	public static function photo_max_size(){
+			return self::$photo_max_size;
+	}
+	
+	public static function photo_save_path(){
+			return self::$photo_save_path;
 	}
 }
 ?>

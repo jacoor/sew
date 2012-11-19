@@ -2,4 +2,5 @@
 .project
 configs/config.php
 cache/templates/*
-photos/80030512418.jpg
+photos/*.*
+cache/images/*.*
