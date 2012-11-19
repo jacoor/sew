@@ -163,15 +163,12 @@ class displayManager extends smarty{
 				//resize 
 				$image = new Imagick( $_FILES['fields']['tmp_name']['photo'] );
 				$imageprops = $image->getImageGeometry();
-				if ($imageprops['width'] <= config::photo_width() && $imageprops['height'] <= config::photo_height()) {
+				if ($imageprops['width'] <= config::photo_width() || $imageprops['height'] <= config::photo_height()) {
 					$error = 'Zbyt mały rozmiar zdjęcia. Wymagany rozmiar: 800 na 800 px';
 					$saved = false;
 				} else {
-					$image->cropThumbnailImage(config::photo_width(),config::photo_height(), imagick::FILTER_LANCZOS, 0.9, false);
+					$image->cropThumbnailImage(config::photo_width(),config::photo_height());
 					$saved = $image->writeImage($_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$filename);
-				}
-				if (!$saved){
-					$error = 'Plik nie został zapisany!';
 				}
 			}else{
 				$saved = false;
