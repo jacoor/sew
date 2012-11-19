@@ -1,1 +1,1 @@
-{if $user->photo }<a class="fancybox" href="/photos/{$user->photo}"><img src="/photos/{$user->photo}" height="100" /></a>{ else } Brak zdjecia {/if}
+{if $photo }<a class="fancybox" href="/photos/{$photo}"><img src="{thumb file="/photos/"|cat:$photo link="false" img="true" height=100}" height="100" /></a>{ else } Brak zdjecia {/if}<br />

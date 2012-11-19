@@ -401,7 +401,7 @@ class displayManager extends smarty{
 	 */
 	public function volunteer_list(){
 		$this->secure('view');
-		$volunteers = $this->engine->loadVolunteers(null, array('surname', 'name', 'PESEL', 'type','id'));
+		$volunteers = $this->engine->loadVolunteers(null, array('surname', 'name', 'PESEL', 'type','id','photo'));
 		$idents = array();
 		$finalNr = $this->engine->session->finalNr ? $this->engine->session->finalNr : config::finalNr();
 		foreach ($volunteers as $v){

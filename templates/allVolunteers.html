@@ -12,7 +12,7 @@
 	<li>Nie dotyczy</li>
 </ul>
 <table border="1" summary="Lista Wolontariuszy" width="100%" id="allVolunteers">
-	<tr><th>Nazwisko</th><th>Imię</th><th>PESEL</th><th>Nr. identyfikatora</th></tr>
+	<tr><th>Nazwisko</th><th>Imię</th><th>PESEL</th><th>Nr. identyfikatora</th><th>Zdjęcie</th></tr>
  {if $volunteers}
   {foreach from=$volunteers item="v"}
 	<tr class="{if $v->type=='czarna lista'} czarnaLista 
@@ -26,6 +26,7 @@
 		<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->PESEL}</a></td>
 		{assign var="id" value= $v->id}
 		<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$idents.$id}</a></td>
+		<td>{include file="box/photo.html" photo=$v->photo}</td>
 	</tr>
 	{/foreach}
 {/if}
