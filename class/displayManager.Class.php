@@ -352,7 +352,7 @@ class displayManager extends smarty{
 		
 		if ($correct){
 			$photo = $this->save_photo(sha1($data['PESEL'].'.jpg'));
-			if ($photo['saved']){
+			if ($photo['saved'] && $_FILES['fields']['name']['photo']){
 				$data['photo'] = sha1($data['PESEL'].'.jpg');
 			}else{
 				$correct= false;
