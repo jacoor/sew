@@ -161,14 +161,36 @@ class displayManager extends smarty{
 			if ($_FILES['fields']['type']['photo'] == config::required_photo_type() && $_FILES['fields']['size']['photo'] <= config::photo_max_size()){
 				//var_dump($_FILES); die();
 				//resize 
-				$image = new Imagick( $_FILES['fields']['tmp_name']['photo'] );
-				$imageprops = $image->getImageGeometry();
-				if ($imageprops['width'] <= config::photo_width() || $imageprops['height'] <= config::photo_height()) {
+				$imageprops = getimagesize($_FILES['fields']['tmp_name']['photo']);
+				//$image = new Imagick( $_FILES['fields']['tmp_name']['photo'] );
+				
+				if ($imageprops[0] <= config::photo_width() || $imageprops[1] <= config::photo_height()) {
 					$error = 'Zbyt mały rozmiar zdjęcia. Wymagany rozmiar: 800 na 800 px';
 					$saved = false;
 				} else {
-					$image->cropThumbnailImage(config::photo_width(),config::photo_height());
-					$saved = $image->writeImage($_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$filename);
+					$image = imagecreatefromjpeg($_FILES['fields']['tmp_name']['photo']);
+					$img_width = $imageprops[0];
+					$img_height = $imageprops[1];
+					if ($imageprops[0] < $imageprops[1]){
+						//wysokosc wieksza od szerokosci
+						//skalujemy po mniejszym - szerokosci
+						$temp_gdim = imagecreatetruecolor( config::photo_width(), config::photo_height());
+						//to tylko resize, jeszcze crop
+						$copied = imagecopyresized($temp_gdim, $image, 0, 0, 0, round(($image_height-$image_width)/2), config::photo_width(), config::photo_height(), $img_width, $img_height);
+						$saved = imagejpeg($temp_gdim, $_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$filename, 90);
+						imagedestroy($temp_gdim);
+						imagedestroy($image);
+					}else{
+						//szerokosc wieksza od wysokosci
+						$temp_gdim = imagecreatetruecolor( config::photo_width(), config::photo_height());
+						//to tylko resize, jeszcze crop
+						$copied = imagecopyresized($temp_gdim, $image, 0, 0, round(($image_width-$image_height)/2), 0, config::photo_width(), config::photo_height(), $img_width, $img_height);
+						$saved = imagejpeg($temp_gdim, $_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$filename, 90);
+						imagedestroy($temp_gdim);
+						imagedestroy($image);
+					}
+					//$image->cropThumbnailImage(config::photo_width(),config::photo_height());
+					//$saved = $image->writeImage($_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$filename);
 				}
 			}else{
 				$saved = false;
@@ -180,6 +202,9 @@ class displayManager extends smarty{
 				'error' => $error
 			);
 		}
+		return  array(
+			'saved' => 1,
+		);
 	}
 	
 	/**
@@ -324,7 +349,7 @@ class displayManager extends smarty{
 			}
 		}
 		
-		if ($correct){
+		if (!$correct){
 			$photo = $this->save_photo($data['PESEL'].'.jpg');
 			if ($photo['saved']){
 				$data['photo'] = $data['PESEL'].'.jpg';
