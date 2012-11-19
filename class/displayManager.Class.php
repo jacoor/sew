@@ -171,12 +171,13 @@ class displayManager extends smarty{
 					$image = imagecreatefromjpeg($_FILES['fields']['tmp_name']['photo']);
 					$img_width = $imageprops[0];
 					$img_height = $imageprops[1];
-					if ($imageprops[0] < $imageprops[1]){
+					if ($img_width < $img_height){
 						//wysokosc wieksza od szerokosci
 						//skalujemy po mniejszym - szerokosci
 						$temp_gdim = imagecreatetruecolor( config::photo_width(), config::photo_height());
 						//to tylko resize, jeszcze crop
-						$copied = imagecopyresized($temp_gdim, $image, 0, 0, 0, round(($image_height-$image_width)/2), config::photo_width(), config::photo_height(), $img_width, $img_height);
+						//var_dump( (int)round(($img_height-$img_width)/2)); die();
+						$copied = imagecopyresized($temp_gdim, $image, 0, 0, 0, (int)round(($img_height-$img_width)/2), config::photo_width(), config::photo_height(), $img_width, $img_width);
 						$saved = imagejpeg($temp_gdim, $_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$filename, 90);
 						imagedestroy($temp_gdim);
 						imagedestroy($image);
@@ -184,7 +185,7 @@ class displayManager extends smarty{
 						//szerokosc wieksza od wysokosci
 						$temp_gdim = imagecreatetruecolor( config::photo_width(), config::photo_height());
 						//to tylko resize, jeszcze crop
-						$copied = imagecopyresized($temp_gdim, $image, 0, 0, round(($image_width-$image_height)/2), 0, config::photo_width(), config::photo_height(), $img_width, $img_height);
+						$copied = imagecopyresized($temp_gdim, $image, 0, 0, (int)round(($img_width-$img_height)/2), 0, config::photo_width(), config::photo_height(), $img_height, $img_height);
 						$saved = imagejpeg($temp_gdim, $_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$filename, 90);
 						imagedestroy($temp_gdim);
 						imagedestroy($image);
@@ -349,7 +350,7 @@ class displayManager extends smarty{
 			}
 		}
 		
-		if (!$correct){
+		if ($correct){
 			$photo = $this->save_photo($data['PESEL'].'.jpg');
 			if ($photo['saved']){
 				$data['photo'] = $data['PESEL'].'.jpg';
