@@ -164,7 +164,7 @@ class displayManager extends smarty{
 				$imageprops = getimagesize($_FILES['fields']['tmp_name']['photo']);
 				//$image = new Imagick( $_FILES['fields']['tmp_name']['photo'] );
 				
-				if ($imageprops[0] <= config::photo_width() || $imageprops[1] <= config::photo_height()) {
+				if ($imageprops[0] < config::photo_width() || $imageprops[1] < config::photo_height()) {
 					$error = 'Zbyt mały rozmiar zdjęcia. Wymagany rozmiar: 800 na 800 px';
 					$saved = false;
 				} else {
