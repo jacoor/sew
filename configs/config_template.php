@@ -23,7 +23,7 @@ final class config{
 	
 	private static $required_photo_type = 'image/jpeg';
 	private static $photo_width = 800;
-	private static $photo_height = 400;
+	private static $photo_height = 800;
 	private static $photo_max_size = 2097152; //2 MB
 	
 	private static $photo_save_path = '/photos/';

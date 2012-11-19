@@ -164,14 +164,18 @@ class displayManager extends smarty{
 				$image = new Imagick( $_FILES['fields']['tmp_name']['photo'] );
 				$imageprops = $image->getImageGeometry();
 				if ($imageprops['width'] <= config::photo_width() && $imageprops['height'] <= config::photo_height()) {
-					// don't upscale
+					$error = 'Zbyt mały rozmiar zdjęcia. Wymagany rozmiar: 800 na 800 px';
+					$saved = false;
 				} else {
-					$image->resizeImage(config::photo_width(),config::photo_height(), imagick::FILTER_LANCZOS, 0.9, true);
+					$image->cropThumbnailImage(config::photo_width(),config::photo_height(), imagick::FILTER_LANCZOS, 0.9, false);
+					$saved = $image->writeImage($_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$filename);
 				}
-				$saved = $image->writeImage($_SERVER['DOCUMENT_ROOT'].config::photo_save_path().$filename);
 				if (!$saved){
 					$error = 'Plik nie został zapisany!';
 				}
+			}else{
+				$saved = false;
+				$error = 'Nieprawidłowe zdjęcie. Zdjęcie musi być w formacie jpg, o rozmiarach conajmniej 800 x 800px oraz maksymalnym rozmiarze 2 MB';
 			}
 			return  array(
 				'file' => $filename,
