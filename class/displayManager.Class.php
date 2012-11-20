@@ -59,10 +59,9 @@ class displayManager extends smarty{
 			}
 			if ($_FILES['fields']['name']['photo']){
 				if($_POST['token'] == sha1($this->user->id.$this->user->password)){
-					$photo = $this->save_photo(sha1($data['PESEL']).'.jpg');
+					$photo = $this->save_photo(sha1($this->user->PESEL).'.jpg');
 					if ($photo['saved'] && $_FILES['fields']['name']['photo']){
-						$data['photo'] = sha1($data['PESEL']).'.jpg';
-						$this->user->photo = sha1($data['PESEL']).'.jpg';
+						$this->user->photo = sha1($this->user->PESEL).'.jpg';
 						HTTP::redirect('/');					
 					}else if($_FILES['fields']['name']['photo']){
 						$correct= false;
