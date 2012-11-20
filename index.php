@@ -66,10 +66,11 @@ switch ($action){
 	case 'update_volunteer_data':
 		$smarty->update_volunteer_data($_REQUEST['fields']);
 		break;
-		
+
 	case 'meetings':
 		$smarty->meetings();
 		break;
+	
 	default: $smarty->default_action();
 }
 
