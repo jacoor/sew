@@ -59,6 +59,7 @@ class displayManager extends smarty{
 			}
 			$this->assign('photo_deadline', config::photo_deadline());
 			$this->assign('photo_deadline_timestamp',strtotime(config::photo_deadline()));
+			$this->assign('security_token',sha1($this->user->id.$this->user->password));
 			$this->display('account.html');
 		}else{
 			if ($login_error){
