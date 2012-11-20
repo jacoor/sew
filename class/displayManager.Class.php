@@ -57,11 +57,14 @@ class displayManager extends smarty{
 					}else unset ($notices[$k]);//czyszczenei innych
 				}
 			}
+			$this->assign('photo_deadline', config::photo_deadline());
+			$this->assign('photo_deadline_timestamp',strtotime(config::photo_deadline()));
 			$this->display('account.html');
 		}else{
 			if ($login_error){
 					$this->assign('login_error','<h2>logowanie niepoprawne</h2>');
 				}
+			$this->assign('photo_deadline', config::photo_deadline());
 			$this->display('index.html');
 		}
 	}

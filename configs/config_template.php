@@ -27,6 +27,8 @@ final class config{
 	private static $photo_max_size = 2097152; //2 MB
 	
 	private static $photo_save_path = '/photos/';
+	
+	private static $photo_deadline = '2012/12/26';
 		
 	public static function hostname(){
 		return self::$hostname;
@@ -98,6 +100,10 @@ final class config{
 	
 	public static function photo_save_path(){
 			return self::$photo_save_path;
+	}
+	
+	public static function photo_deadline(){
+			return self::$photo_deadline;
 	}
 }
 ?>

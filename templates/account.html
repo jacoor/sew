@@ -5,6 +5,26 @@
 		<th>Zdjęcie:	</th>
 		<td>{include file="box/photo.html" photo=$user->photo}</td>
 	</tr>
+	{if $smarty.now < $photo_deadline_timestamp}
+	<tr>
+		<td>&nbsp;</td>
+		<td colspan="">
+			<form id="register" action="/index.php" enctype="multipart/form-data" method="post">
+				<label {if $error_fields.photo}class="error"{/if}>Zdjęcie:</label><input type="file" value="" name="fields[photo]" />
+				{if $file_error}
+					<p class="error"><strong>{$file_error }</strong></p>
+				{/if}
+				<input type="hidden" name="id" value="{$user->id}" />
+				<input type="hidden" name="token" value="{$security_token}" />
+				<p class="error"><strong>Zdjęcie możesz zmienić tylko do {$photo_deadline}.</strong></p>
+			</form>
+		</td>
+	</tr>
+	{else}
+	<tr><td>&nbsp;</td>
+		<td>Zdjęcie można było zmieniać tylko do  {$photo_deadline}.</td>
+	</tr>
+	{/if}
 	<tr>
 		<th>Imię:	</th>
 		<td>{$user->name}</td>
