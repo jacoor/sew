@@ -57,21 +57,23 @@ class displayManager extends smarty{
 					}else unset ($notices[$k]);//czyszczenei innych
 				}
 			}
-			if ($_FILES['fields']['name']['photo']){
-				if($_POST['token'] == sha1($this->user->id.$this->user->password)){
-					$photo = $this->save_photo(sha1($this->user->PESEL).'.jpg');
-					if ($photo['saved'] && $_FILES['fields']['name']['photo']){
-						$this->user->photo = sha1($this->user->PESEL).'.jpg';
-						HTTP::redirect('/');					
-					}else if($_FILES['fields']['name']['photo']){
-						$correct= false;
-						$error_fields['photo'] = true;
-						$this->assign('file_error', $photo['error']);
+			if (strtotime(config::photo_deadline())>=time()){
+				if ($_FILES['fields']['name']['photo']){
+					if($_POST['token'] == sha1($this->user->id.$this->user->password)){
+						$photo = $this->save_photo(sha1($this->user->PESEL).'.jpg');
+						if ($photo['saved'] && $_FILES['fields']['name']['photo']){
+							$this->user->photo = sha1($this->user->PESEL).'.jpg';
+							HTTP::redirect('/');					
+						}else if($_FILES['fields']['name']['photo']){
+							$correct= false;
+							$error_fields['photo'] = true;
+							$this->assign('file_error', $photo['error']);
+						}
+					}else{
+						$this->display('security_alert.html');
+						session_destroy();
+						die;
 					}
-				}else{
-					$this->display('security_alert.html');
-					session_destroy();
-					die;
 				}
 			}
 			$this->assign('photo_deadline', config::photo_deadline());
@@ -371,7 +373,7 @@ class displayManager extends smarty{
 			}
 		}
 		
-		if ($correct){
+		if ($correct && strtotime(config::photo_deadline())>=time()){
 			$photo = $this->save_photo(sha1($data['PESEL']).'.jpg');
 			if ($photo['saved'] && $_FILES['fields']['name']['photo']){
 				$data['photo'] = sha1($data['PESEL']).'.jpg';
