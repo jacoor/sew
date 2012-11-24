@@ -9,19 +9,7 @@
 		<th>Zdjęcie:	</th>
 		<td>{include file="box/photo.html" photo = $volunteer->photo}</td>
 	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td>
-			<p><strong>Dodaj zdjęcie, które chcesz żeby było na identyfikatorze. Ma to być oczywiście zdjęcie twarzy, takie żeby można Cię było na nim rozpoznać. <br>
-			Maksymalny rozmiar pliku ze zdjęciem: 2MB, format jpg. <br>
-			Zdjęcie będzie przeskalowane automatycznie, jednakże minimalne wymagane rozmiary zdjęcia to 800px na 800px. 
-			<br> Jeśli nie masz zdjęcia w formie elektronicznej, bez obaw, zdjęcie zrobimy podczas spotkania.</strong></p>
-			<label {if $error_fields.photo}class="error"{/if}>Zdjęcie:</label><input type="file" value="" name="fields[photo]" />
-			{if $file_error}
-				<p class="error"><strong>{$file_error }</strong></p>
-			{/if}
-		</td>
-	</tr>
+
 	<tr>
 		<th>Imię:	</th>
 		<td>{$volunteer->name}</td>

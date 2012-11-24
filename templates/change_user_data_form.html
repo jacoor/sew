@@ -4,7 +4,7 @@
 	<p class="error">{$update_error}</p>
 {/if}
 {if $user->ACL_check('edit')}
-	<form id="register" action="/index.php" method="post">
+	<form id="register" action="/index.php" method="post" enctype="multipart/form-data">
 		<fieldset>
 		{if $smarty.post.fields}
 			{assign var="values" value=$smarty.post.fields}
@@ -14,8 +14,25 @@
 		<input type="hidden" name="fields[id]" value="{$values.id}" />
 		<input type="hidden" name="fields[token]" value="{$values.token}" />
 		<ul>
+			<li>
+				<p>{include file="box/photo.html" photo=$volunteer->photo}</p>
+				<p><strong>Dodaj zdjęcie które będzie na identyfikatorze. Ma to być zdjęcie twarzy, na którym będzie można wolontariusza rozpoznać.
+					<br>
+					Pamiętaj że DOKŁADNIE TO ZDJĘCIE będzie na identyfikatorze, i to pomniejszone, takie mniej więcej jakie się pokaże powyżej po załadowaniu.
+					Maksymalny rozmiar pliku ze zdjęciem: 2MB, format jpg. <br>
+					Zdjęcie będzie przeskalowane automatycznie, jednakże minimalne wymagane rozmiary zdjęcia to 800px na 800px. 
+				</strong></p>
+				<label {if $error_fields.photo}class="error"{/if}>
+					Zdjęcie:</label><input type="file" value="" name="fields[photo]" />
+				{if $file_error}
+					<p class="error"><strong>{$file_error }</strong></p>
+				{/if}
+			</li>
 			<li {if $error_fields.name}class="error"{/if}><label>Imię:</label><input type="text" value="{$values.name}" name="fields[name]" /></li>
 			<li {if $error_fields.surname}class="error"{/if}><label>Nazwisko:</label><input type="text" value="{$values.surname}" name="fields[surname]" /></li>
+			
+			
+			
 			<li {if $error_fields.email}class="error"{/if}><label>E-mail:</label><input type="text" value="{$values.email}" name="fields[email]" />
 				{$email_unique_error}
 			</li>

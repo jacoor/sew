@@ -617,6 +617,7 @@ class displayManager extends smarty{
 		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
 		$values = $volunteer[0]->get();
 		$values['token'] = sha1($values['id'].$this->user->id);
+		$this->assign_by_ref('volunteer',$volunteer[0]);
 		$this->assign_by_ref('values',$values);
 		$this->display('change_user_data_form.html');
 	}
@@ -763,12 +764,24 @@ class displayManager extends smarty{
 		#echo ('<pre>');
 		#var_dump(new volunteer($this->engine,$data));die();
 		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
+		$volunteerObj =  $volunteer;
 		$volunteer = $volunteer[0]->get();
 		$token = sha1($volunteer['id'].$this->user->id);
 		if ($token !== $data['token'] ){
 			$this->display('security_alert.html');
 			session_destroy();
 			die;
+		}
+			
+		if ($correct){ //here you can always edit
+			$photo = $this->save_photo(sha1($data['PESEL']).'.jpg');
+			if ($photo['saved'] && $_FILES['fields']['name']['photo']){
+				$data['photo'] = sha1($data['PESEL']).'.jpg';
+			}else if($_FILES['fields']['name']['photo']){
+				$correct= false;
+				$error_fields['photo'] = true;
+				$this->assign('file_error', $photo['error']);
+			}
 		}
 		if($correct){
 			//create new volunteer
@@ -792,6 +805,7 @@ class displayManager extends smarty{
 			HTTP::redirect('?action=volunteer_view&id='.$data['id']);
 		}else{
 			$this->assign_by_ref('error_fields',$error_fields);
+			$this->assign_by_ref('volunteer',$volunteerObj[0]);
 			$this->assign('update_error','Nie wszystkie pola formularza zostały wypełnione prawidłowo. Popraw błędy i spróbuj jeszcze raz.');
 			$this->display('change_user_data_form.html');
 		}
