@@ -214,7 +214,7 @@ var sew = {
 		}
 	},
 	photo_check : function(){
-		if ($('input[type=file]').val()==''){
+		if (($('input[type=file]').val()=='' && $('.vphoto').length ==0)){
 			return confirm('Nie zostało dodane zdjęcie. Czy jesteś pewien/a że chcesz kontynuować?');
 		}
 		return true;
