@@ -30,7 +30,7 @@
 		<tr><th>Autor:</th><td>{if $notice->author=="self"}Wygenerowane automagicznie{elseif $notice->author}{$notice->author}{else}{$user->login}{/if}</td></tr>
 		<tr class="text_value"><th width="50%">Uwagi:</th><td width="50%"><textarea {if $error_fields.notice.text_value}class="error"{/if} name="notice[text_value]">{$notice->text_value}</textarea></td></tr>
 			<tr class="m_date"><th>Data i godzina spotkania:</th><td>{$notice->m_date}</td></tr>
-			<tr class="m_presence"><th>Brak zdjęcia:</th><td><input  type="checkbox" value="1" name="notice[m_presence]" {if $notice->m_presence}checked="checked"{/if} /></td></tr>
+			<tr class="m_presence"><th>Obecność na spotkaniu:</th><td><input  type="checkbox" value="1" name="notice[m_presence]" {if $notice->m_presence}checked="checked"{/if} /></td></tr>
 			<tr class="rank"><th>Ocena:</th><td><input type="text" {if $error_fields.volunteer.rank}class="error"{/if} value="{$volunteer->rank}" name="volunteer[rank]" class="rank_field"/></td></tr>
 			<tr class="rank"><td colspan="2" class="rank_info"><strong>Dopuszczalne są liczby całkowite z zakresu 1 - 5</strong></td></tr>
 

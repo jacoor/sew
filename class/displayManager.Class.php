@@ -668,6 +668,7 @@ class displayManager extends smarty{
 													);
 		$correct = true;
 		if ($data['active']!=1) $data['active']=0;
+		
 		foreach ($data as $key => &$val){
 			$data[$key] = trim($val);
 		}

@@ -48,10 +48,9 @@
 					<option {if $values.type=="czarna lista"} selected="selected"{/if}>czarna lista</option>
 				</select>
 			</li>
-			{if $user->ACL_check('admin')}
-				<li><label>Konto aktywne:</label><input type="checkbox" value="1" name="fields[active]" {if $values.active==1}checked="checked"{/if} /></li>
-			{/if}
-<li {if $error_fields.birth_date}class="error"{/if}><label>data urodzenia:</label><input type="text" value="{$values.birth_date}" class="jq_date" name="fields[birth_date]" /> (RRRR-MM-DD)
+			<li><label>Konto aktywne:</label><input type="checkbox" value="1" name="fields[active]" {if $values.active==1}checked="checked"{/if} /></li>
+
+			<li {if $error_fields.birth_date}class="error"{/if}><label>data urodzenia:</label><input type="text" value="{$values.birth_date}" class="jq_date" name="fields[birth_date]" /> (RRRR-MM-DD)
 			</li>
 			<li {if $error_fields.PESEL}class="error"{/if}><label>PESEL:</label><input type="text" value="{$values.PESEL}" name="fields[PESEL]" />
 				{$PESEL_unique_error}
