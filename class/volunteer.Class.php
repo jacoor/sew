@@ -40,7 +40,7 @@ final class volunteer extends genericClass implements PHPSucks{
 														//nie dotyczy, zakwalifikowany na finał, dane w systemie fundacyjnym 
 														//(zakwalifikowany na finał)
 	private $token 									; //token for email address checking
-	private $consent_processing_of_personal_data		: 	// zgoda na przetwarzanie danych. Wymagana do rejestracji. 
+	private $consent_processing_of_personal_data		; 	// zgoda na przetwarzanie danych. Wymagana do rejestracji. 
 															//Jedyna możliwa wartość - tak
 	private $date_consent_processing_of_personal_data	; // zgoda na przetwarzanie danych - data wyrażenia zgody.	
 	private $processing_of_personal_data_for_marketing_purposes  ;  //zgoda na przetwarzanie danych w celach marketingowych. 
