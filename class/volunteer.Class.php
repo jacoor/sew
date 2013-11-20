@@ -41,7 +41,7 @@ final class volunteer extends genericClass implements PHPSucks{
 														//(zakwalifikowany na finał)
 	private $token 									; //token for email address checking
 	private $consent_processing_of_personal_data		; 	// zgoda na przetwarzanie danych. Wymagana do rejestracji. 
-															//Jedyna możliwa wartość - true
+															//Jedyna możliwa wartość - on
 	private $date_consent_processing_of_personal_data	; // zgoda na przetwarzanie danych - data wyrażenia zgody.	
 	/*private $processing_of_personal_data_for_marketing_purposes  ;  //zgoda na przetwarzanie danych w celach marketingowych. 
 																	//Dopuszczalne wartosci - tak, nie
@@ -49,7 +49,7 @@ final class volunteer extends genericClass implements PHPSucks{
 																		//przerwarzanie danych w celach marketingowych
 	*/
 	private $accept_of_sending_data_to_WOSP							;	//zgoda na przekazanie danych do Fundacji WOSP. 
-																		//wymagana do rejestracji w systemie. Jedyna możliwa wartosc: true
+																		//wymagana do rejestracji w systemie. Jedyna możliwa wartosc: on
 
 	private $date_accept_of_sending_data_to_WOSP 					; 	//data wyrażenia powyższej zgody
 	private $deleted						=	 0; //is user deleted?
