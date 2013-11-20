@@ -7,9 +7,9 @@
  */
 final class config{
 	
-	private static $hostname = "";
-	private static $username = "";
-	private static $pass = "";
+	private static $hostname = "";  #mysql host name
+	private static $username = "";	#mysql user name
+	private static $pass = ""; #mysql pass
 	private static $dbname = "";
 	private static $port = '3306';
 	private static $mail_host="";
