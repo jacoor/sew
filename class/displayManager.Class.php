@@ -263,7 +263,7 @@ class displayManager extends smarty{
 								'password',
 								'password_repeat',
 								'consent_processing_of_personal_data',
-								'accept_of_sending_data_to_WOSP'
+								'accept_of_sending_data_to_WOSP',
 								);
 		$allowed_doc_type = array(
 												'legitymacja szkolna',

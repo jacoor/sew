@@ -108,8 +108,8 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   UNIQUE KEY `login` (`login`),
   UNIQUE KEY `PESEL` (`PESEL`),
   UNIQUE KEY `email` (`email`),
-  KEY `name` (`surname`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=176 ;
+  KEY `surname` (`surname`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Ograniczenia dla zrzutów tabel
