@@ -88,8 +88,16 @@ li{
 li input, li textarea{
 	float:right;
 }
+li input[type=checkbox]{
+	float:none;
+	width:auto;
+	display:inline-block;
+}
 li label, li p{
 	float:left;
+}
+li input[type=checkbox] + label{
+	float:none;
 }
 li p{
 	clear:both;

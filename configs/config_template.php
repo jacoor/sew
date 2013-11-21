@@ -7,9 +7,9 @@
  */
 final class config{
 	
-	private static $hostname = "";
-	private static $username = "";
-	private static $pass = "";
+	private static $hostname = "";  #mysql host name
+	private static $username = "";	#mysql user name
+	private static $pass = ""; #mysql pass
 	private static $dbname = "";
 	private static $port = '3306';
 	private static $mail_host="";
@@ -19,7 +19,7 @@ final class config{
 	private static $mail_from_email="";
 	private static $mail_port="";//int
 	private static $mail_auth=""; //bolean
-	private static $finalNr = '17';
+	private static $finalNr = '22';
 	
 	private static $required_photo_type = 'image/jpeg';
 	private static $photo_width = 800;
@@ -28,7 +28,7 @@ final class config{
 	
 	private static $photo_save_path = '/photos/';
 	
-	private static $photo_deadline = '2012/12/26';
+	private static $photo_deadline = '2013/12/26';
 		
 	public static function hostname(){
 		return self::$hostname;

@@ -19,15 +19,16 @@ class validator{
 
 	public static function check_onlyalphabetical($text)
 	{
+	setlocale(LC_COLLATE, 'en_US.utf8');
     $text = iconv('UTF-8', 'ASCII//TRANSLIT', $text);
     $text = str_replace('?', '', $text);
+    $text = str_replace("'", '', $text);
     $text = str_replace('-', '', $text);
     $text = str_replace(' ', '', $text);
     if (!ctype_alpha($text))
     {
         return false;
     }
-    
     return true;
 	}
 		

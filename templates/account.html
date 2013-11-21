@@ -12,7 +12,7 @@
 				<form id="register" action="/index.php" enctype="multipart/form-data" method="post">
 					<p><strong>Dodaj zdjęcie, które chcesz żeby było na identyfikatorze. Ma to być oczywiście zdjęcie twarzy, takie żeby można Cię było na nim rozpoznać. <br>
 						Maksymalny rozmiar pliku ze zdjęciem: 2MB, format jpg. Zdjęcie będzie przeskalowane automatycznie, jednakże minimalne wymagane rozmiary zdjęcia to 800px na 800px. <br>
-						<br /><span style="color:red;">PAMIĘTAJCIE, ŻE DOKŁADNIE TO ZDJĘCIE BĘDZIE NA IDENTYFIKATORZE, TYLKO W DUŻO MNIEJSZYM FORMACIE. ZDJĘCIA PRZESKALOWANE, Z DOŁOŻONĄ OGROMNĄ RAMKĄ CZY INNYM I TAKIMI EFEKTAMI MOGĄ SKUTKOWAĆ WYKLUCZENIEM Z PROCESU REKRUTACJI. Mamy po prostu za dużo tych zdjęć żeby je ręcznie przerabiać i do każdego z Was pisać że zdjęcie jest kiepskie.</span><br><br>
+						<br /><span style="color:red;">PAMIĘTAJCIE, ŻE DOKŁADNIE TO ZDJĘCIE BĘDZIE NA IDENTYFIKATORZE, TYLKO W DUŻO MNIEJSZYM FORMACIE. ZDJĘCIA PRZESKALOWANE, Z DOŁOŻONĄ OGROMNĄ RAMKĄ CZY INNYMI TAKIMI EFEKTAMI MOGĄ SKUTKOWAĆ WYKLUCZENIEM Z PROCESU REKRUTACJI. Mamy po prostu za dużo tych zdjęć żeby je ręcznie przerabiać i do każdego z Was pisać że zdjęcie jest kiepskie.</span><br><br>
 					</strong></p>
 					<label {if $error_fields.photo}class="error"{/if}>Zdjęcie:</label><input type="file" value="" name="fields[photo]" />
 					{if $file_error}
