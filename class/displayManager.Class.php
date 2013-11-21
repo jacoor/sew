@@ -31,6 +31,7 @@ class displayManager extends smarty{
 		) ;
 
 		$this->assign('site_root', $this->site_root);
+		$this->assign('finalNr',$this->engine->session->finalNr ? $this->engine->session->finalNr : config::finalNr());
 		if ($this->engine->session->isLoggedIn()){
 			$this->user = $this->engine->session->getUser();
 			$this->assign_by_ref('user', $this->user);
@@ -260,7 +261,9 @@ class displayManager extends smarty{
 								'doc_id',
 								'login',
 								'password',
-								'password_repeat'
+								'password_repeat',
+								'consent_processing_of_personal_data',
+								'accept_of_sending_data_to_WOSP',
 								);
 		$allowed_doc_type = array(
 												'legitymacja szkolna',
@@ -453,7 +456,6 @@ class displayManager extends smarty{
 		$this->secure('view');
 		$volunteers = $this->engine->loadVolunteers(null, array('surname', 'name', 'PESEL', 'type','id','photo'));
 		$idents = array();
-		$finalNr = $this->engine->session->finalNr ? $this->engine->session->finalNr : config::finalNr();
 		foreach ($volunteers as $v){
 			 $idents[$v->id]= $this->engine->getIdentNr($v->id, $finalNr) ? $this->engine->getIdentNr($v->id, $finalNr) : 'nie ma';
 		}
