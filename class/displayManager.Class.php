@@ -22,7 +22,7 @@ class displayManager extends smarty{
 		$this->config_dir      		= 	$_SERVER['DOCUMENT_ROOT'].'/configs';
 		$this->cache_dir 					= 	$_SERVER['DOCUMENT_ROOT'].'/cache/templates/';
 
-		$this->site_root='http://' .
+		$this->site_root='https://' .
 		($_SERVER["HTTP_HOST"]
 		?
 		$_SERVER["HTTP_HOST"]
