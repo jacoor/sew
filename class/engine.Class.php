@@ -39,7 +39,7 @@ final class EngineClass{
 	private function __construct()
 	{		
  		$path = ini_get('include_path');
- 		ini_set('include_path', $_SERVER['DOCUMENT_ROOT']."/pear" .PATH_SEPARATOR.$path);
+ 		ini_set('include_path', $_SERVER['DOCUMENT_ROOT']."/pear" . PATH_SEPARATOR .$_SERVER['DOCUMENT_ROOT']."/pear/PEAR" . PATH_SEPARATOR . $path);
 		
 		$this->db = sqlManager::GetInstance();
 		$this->session = session::GetInstance($this->db, $this);
