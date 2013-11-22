@@ -25,7 +25,7 @@
 				{/if}
 			</li>
 <li {if $error_fields.birth_date}class="error"{/if}><label>data urodzenia:</label><input type="text" value="{$values.birth_date}" class="jq_date" name="fields[birth_date]" /> (RRRR-MM-DD)
-			<p><strong>Oświadczenie rodzica / opiekuna osoby niepełnoletniej można pobrać pod adresem: <a href="http://sew.wosp.wroc.pl/zgoda.pdf">http://sew.wosp.wroc.pl/zgoda.pdf</a></strong></p>
+			<p><strong>Oświadczenie rodzica / opiekuna osoby niepełnoletniej można pobrać pod adresem: <a href="https://sew.wosp.wroc.pl/zgoda.pdf">https://sew.wosp.wroc.pl/zgoda.pdf</a></strong></p>
 			</li>
 			<li {if $error_fields.PESEL}class="error"{/if}><label>PESEL:</label><input type="text" value="{$values.PESEL}" name="fields[PESEL]" />
 				{$PESEL_unique_error}
