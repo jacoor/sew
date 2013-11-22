@@ -214,7 +214,7 @@ final class EngineClass{
 		$mime = new Mail_mime($crlf);
 		$to = $mime->encodeRecipients($receiver);
 		$from='"'.config::mail_from_name().'"<'.config::mail_from_email().'>';
-		$replyTo='"'.config::mail_from_name().'"<'.config::mail_from_email().'>';
+		$replyTo='"'.config::mail_reply_to().'"<'.config::mail_reply_to().'>';
 		$mime->setTXTBody($text);
 		$mime->setHTMLBody($msg);
 		$build_params = array(
