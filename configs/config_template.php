@@ -17,6 +17,7 @@ final class config{
 	private static $mail_pass=""; 
 	private static $mail_from_name="";//@FIXME utf8 characters
 	private static $mail_from_email="";
+	private static $mail_reply_to="";
 	private static $mail_port="";//int
 	private static $mail_auth=""; //bolean
 	private static $finalNr = '22';
@@ -68,6 +69,10 @@ final class config{
 	
 	public static function mail_from_name(){
 		return self::$mail_from_name;
+	}
+	
+	public static function mail_reply_to(){
+		return self::$mail_reply_to;
 	}
 	
 	public static function mail_port(){
