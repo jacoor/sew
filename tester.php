@@ -1,3 +1,5 @@
+Plik testowy.
+<br />
 <?php/*
 require_once 'class/engine.Class.php';
 require_once 'class/volunteer.Class.php';
@@ -44,7 +46,3 @@ echo '<h3>zakomentowany test sqlManagiera</h3>';
  * 
  */
 ?>
-things to do next:
-1. implement sqlmanager to engine class
-2. implement destructors of all classes (saving and everything in engine)
-3. implement session... in engine? - watch out for security.
