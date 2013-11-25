@@ -1,6 +1,7 @@
 	<form id="login" action="/index.php" method="post">
 		<fieldset>
 		<input type="hidden" name="action" value="login" />
+		<h2 class="error">Zeszłoroczne konta nie działaja! Załóżcie nowe!</h2>
 		<legend><b> {if !$legend }Jeśli posiadasz już konto w systemie - zaloguj się:{else}{$legend}{/if}</b></legend>
 		{$login_error}
 		<ul>
