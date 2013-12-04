@@ -30,7 +30,7 @@ final class volunteer extends genericClass implements PHPSucks{
 	private $phone 									;
 	private $p_phone 								;
 	private $r_date 								;
-	private $rank 									;
+	private $rank 									; //ocena, liczby całkowite 1 - 5 
 	private $active 								;
 	private $doc_id 								;
 	private $doc_type 							; 	//enum: available: legitymacja szkolna, legitymacja studencka, 
@@ -43,11 +43,7 @@ final class volunteer extends genericClass implements PHPSucks{
 	private $consent_processing_of_personal_data		; 	// zgoda na przetwarzanie danych. Wymagana do rejestracji. 
 															//Jedyna możliwa wartość - on
 	private $date_consent_processing_of_personal_data	; // zgoda na przetwarzanie danych - data wyrażenia zgody.	
-	/*private $processing_of_personal_data_for_marketing_purposes  ;  //zgoda na przetwarzanie danych w celach marketingowych. 
-																	//Dopuszczalne wartosci - tak, nie
-	private $date_processing_of_personal_data_for_marketing_purposes  ;  //data zmiany statusu wyrażenia zgodny na 
-																		//przerwarzanie danych w celach marketingowych
-	*/
+	
 	private $accept_of_sending_data_to_WOSP							;	//zgoda na przekazanie danych do Fundacji WOSP. 
 																		//wymagana do rejestracji w systemie. Jedyna możliwa wartosc: on
 
