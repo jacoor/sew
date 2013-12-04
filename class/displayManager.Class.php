@@ -21,14 +21,17 @@ class displayManager extends smarty{
 		$this->compile_dir     		= 	$_SERVER['DOCUMENT_ROOT'].'/cache/templates/';
 		$this->config_dir      		= 	$_SERVER['DOCUMENT_ROOT'].'/configs';
 		$this->cache_dir 					= 	$_SERVER['DOCUMENT_ROOT'].'/cache/templates/';
-
-		$this->site_root='https://' .
+		$this->protocol = "http";
+  		if (isset($_SERVER['HTTPS']) && !strcasecmp($_SERVER['HTTPS'], 'on')) {
+			$this->protocol = 'https';
+  		}
+		$this->site_root= $this->protocol.'://' .
 		($_SERVER["HTTP_HOST"]
-		?
+			?
 		$_SERVER["HTTP_HOST"]
-		:
+			:
 		$_SERVER["SERVER_NAME"]
-		) ;
+		);
 
 		$this->assign('site_root', $this->site_root);
 		$this->assign('finalNr',$this->engine->session->finalNr ? $this->engine->session->finalNr : config::finalNr());
