@@ -88,6 +88,15 @@
 		<th>Data rejestracji w systemie:	</th>
 		<td>{$user->r_date}</td>
 	</tr>
+	{ if $user->statement_file && !$user->statement_downloaded }
+		<tr>
+			<th colspan="2"><a href="?action=download_statement">Pobierz oświadczenie dla wolontariusza</a></th>
+		</tr>
+	{ elseif $user->statement_downloaded }
+		<tr>
+			<th colspan="2">Oświadczenie wolontariusza zostało pobrane: {$user->statement_downloaded_timestamp}</th>
+		</tr>
+	{ /if }
 </table>
 
 	<div id="meeting">
