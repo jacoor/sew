@@ -457,7 +457,20 @@ class displayManager extends smarty{
 	 */
 	public function volunteer_list(){
 		$this->secure('view');
-		$volunteers = $this->engine->loadVolunteers(null, array('surname', 'name', 'PESEL', 'login','type','id','photo'));
+		$volunteers = $this->engine->loadVolunteers(null, 
+														array(
+															'surname', 
+															'name', 
+															'PESEL', 
+															'login',
+															'type',
+															'id',
+															'photo',
+															'statement',
+															'statement_downloaded',
+															'statement_downloaded_timestamp',
+														)
+													);
 		$idents = array();
 		foreach ($volunteers as $v){
 			 $idents[$v->id]= $this->engine->getIdentNr($v->id, $finalNr) ? $this->engine->getIdentNr($v->id, $finalNr) : 'nie ma';

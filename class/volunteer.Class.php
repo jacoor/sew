@@ -125,6 +125,29 @@ final class volunteer extends genericClass implements PHPSucks{
 	}
 	
 	/**
+	 * Check statement state
+	 * @return string
+	 * - brak dokumentu - when file name is not declared in DB
+	 * - gotowe do pobrania - when file name is declared and missing downloaded timestamp
+	 * - pobrane: timestamp   
+	 */
+	public function getStatementState(){
+		$s = $this->statement;
+		$sd = $this->statement_downloaded;
+		$sdt = $this->statement_downloaded_timestamp;
+		if (!$s){
+			return "Brak dokumentu";
+		}
+		if ($s && !$sd){
+			return "Gotowe do pobrania";
+		}
+		if ($s && $sd && $sdt){
+			return "Pobrane: ".$sdt;
+		}
+		return 'błąd?';
+	}
+	
+	/**
 	 * check user rights
 	 * @param $role_name
 	 * @return boolean
