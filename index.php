@@ -75,17 +75,18 @@ switch ($action){
 		/*
 			Call smarty->download_statement($_REQUEST[id]);
 			two things:
-			if (request[id]){
-				check currently logged user privileges.
+			if request[id]:
+				- check currently logged user privileges.
 					- if superadmin
 						- allow download file for this user
-					- if user for which this statement is for:
-						- check if assessment has not been already downloaded, 
-							-if so, simply redirect him to where he came from.
-						- check if file exists
-							- if not, throw nice error
-						- return file for downloading
-			}
+					- else: no access error (should be private function secure($privilege))
+			No request(id):
+				- if user for which this statement is for:
+					- check if assessment has not been already downloaded, 
+						-if so, simply redirect him to where he came from.
+					- check if file exists
+						- if not, throw nice error
+					- return file for downloading
 
 		*/
 		echo "Not implemented";
