@@ -71,6 +71,10 @@ switch ($action){
 		$smarty->meetings();
 		break;
 	
+	case 'download_statement':
+		echo "Not implemented";
+		break;
+		
 	default: $smarty->default_action();
 }
 
