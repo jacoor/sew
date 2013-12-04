@@ -124,3 +124,6 @@ fieldset {
 }
 h3{overflow:hidden;}
 h3 span{ float:left;}
+.text-left{
+	text-align:left;
+}
