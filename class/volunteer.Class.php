@@ -30,7 +30,11 @@ final class volunteer extends genericClass implements PHPSucks{
 	private $phone 									;
 	private $p_phone 								;
 	private $r_date 								;
-	private $rank 									; //ocena, liczby całkowite 1 - 5 
+	private $rank 									; //ocena, liczby całkowite 1 - 5
+	private $statement								; //Nazwa pliku pdf z oświadczeniem Wolontariusza, pobranym z /
+														//systemu Fundacji WOŚP.
+	private $statement_downloaded; //Czy oświadczenie zostało pobrane przez wolontariusza?
+	private $statement_downloaded_timestamp; //Timestamp pobrania oświadczenia
 	private $active 								;
 	private $doc_id 								;
 	private $doc_type 							; 	//enum: available: legitymacja szkolna, legitymacja studencka, 
