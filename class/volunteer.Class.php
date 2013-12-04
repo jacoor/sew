@@ -31,7 +31,7 @@ final class volunteer extends genericClass implements PHPSucks{
 	private $p_phone 								;
 	private $r_date 								;
 	private $rank 									; //ocena, liczby całkowite 1 - 5
-	private $statement								; //Nazwa pliku pdf z oświadczeniem Wolontariusza, pobranym z /
+	private $statement_file							; //Nazwa pliku pdf z oświadczeniem Wolontariusza, pobranym z /
 														//systemu Fundacji WOŚP.
 	private $statement_downloaded; //Czy oświadczenie zostało pobrane przez wolontariusza?
 	private $statement_downloaded_timestamp; //Timestamp pobrania oświadczenia
@@ -132,16 +132,16 @@ final class volunteer extends genericClass implements PHPSucks{
 	 * - pobrane: timestamp   
 	 */
 	public function getStatementState(){
-		$s = $this->statement;
+		$sf = $this->statement_file;
 		$sd = $this->statement_downloaded;
 		$sdt = $this->statement_downloaded_timestamp;
-		if (!$s){
+		if (!$sf){
 			return "Brak dokumentu";
 		}
-		if ($s && !$sd){
+		if ($sf && !$sd){
 			return "Gotowe do pobrania";
 		}
-		if ($s && $sd && $sdt){
+		if ($sf && $sd && $sdt){
 			return "Pobrane: ".$sdt;
 		}
 		return 'błąd?';

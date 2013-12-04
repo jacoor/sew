@@ -466,7 +466,7 @@ class displayManager extends smarty{
 															'type',
 															'id',
 															'photo',
-															'statement',
+															'statement_file',
 															'statement_downloaded',
 															'statement_downloaded_timestamp',
 														)

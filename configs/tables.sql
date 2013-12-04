@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   `p_phone` varchar(45) DEFAULT NULL COMMENT '''numer do rodzica''',
   `r_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '''data rejestracji''',
   `rank` tinyint(4) NOT NULL DEFAULT '0' COMMENT '''ocena''',
-  `statement` varchar(255) NULL DEFAULT NULL COMMENT '''Nazwa pliku pdf z oświadczeniem Wolontariusza, pobranym z systemu Fundacji WOŚP.''', 
+  `statement_file` varchar(255) NULL DEFAULT NULL COMMENT '''Nazwa pliku pdf z oświadczeniem Wolontariusza, pobranym z systemu Fundacji WOŚP.''', 
   `statement_downloaded` binary(1) NOT NULL DEFAULT 0 COMMENT '''Czy oświadczenie zostało pobrane przez wolontariusza?''',
   `statement_downloaded_timestamp` timestamp NULL DEFAULT NULL  COMMENT '''Timestamp pobrania oświadczenia''', 
   `active` binary(1) NOT NULL DEFAULT '0' COMMENT 'do potwierdzania adresu email - po potwierdzeniu 1 co uaktywnia konto',
