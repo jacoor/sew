@@ -124,7 +124,7 @@ class FileException extends  Exception
 {
 	function __construct($in_errormsg=Null,$in_errorcode=Null)
 	{
-		parent::__construct("Bład pliku:
+		parent::__construct("Błąd pliku:
 		{$in_errormsg}",$in_errorcode);
 	}
 }

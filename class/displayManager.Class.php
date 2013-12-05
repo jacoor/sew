@@ -851,20 +851,25 @@ class displayManager extends smarty{
 	 * @return statement file contents
 	 */
 	 public function download_statement($data){
-	 	if ($data['id']){
-	 		/* id is set, logged in user should be superadmin */
-	 		$this->secure('admin');
-	 		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
-	 		$volunteer = $volunteer[0];
-	 		$volunteer->getStatementFileContents(false);
-	 	}else{
-	 		/* else only currently logged in user statement is available */ 
-			$this->secure('self');
-			if (!$this->user->statement_downloaded){
-				$this->user->getStatementFileContents();
-			}else{
-				HTTP::redirect('/');
-			}
+		try {
+		 	if ($data['id']){
+		 		/* id is set, logged in user should be superadmin */
+		 		$this->secure('admin');
+		 		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
+		 		$volunteer = $volunteer[0];
+		 		$volunteer->getStatementFileContents(false);
+		 	}else{
+		 		/* else only currently logged in user statement is available */ 
+				$this->secure('self');
+				if (!$this->user->statement_downloaded){
+					$this->user->getStatementFileContents();
+				}else{
+					HTTP::redirect('/');
+				}
+		 	}
+	 	}catch (FileException $e){
+	 		echo $e->getMessage();
+	 		die();
 	 	}
 	 }
 }
