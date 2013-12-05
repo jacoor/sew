@@ -146,6 +146,21 @@ final class volunteer extends genericClass implements PHPSucks{
 		}
 		return 'błąd?';
 	}
+
+	/**
+	 * Proxy for getting this user statement contents.
+	 * @param updateStatementDownload default true - to update statement download status & timestamp
+	 * @return file contents
+	 */
+	public function getStatementFileContents($updateStatementDownload = true){
+		/**
+		 * - check statement state
+		 * - check if file exists
+		 * - get file contents
+		 * - update counter
+		 * - spit contents of the file for download
+		 */
+	}
 	
 	/**
 	 * check user rights

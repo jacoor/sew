@@ -844,5 +844,24 @@ class displayManager extends smarty{
 		$this->assign_by_ref('meetings',$meetings);
 		$this->display('meetings.html');
 	}
+
+	/**
+	 * download statement
+	 * @param $_REQUEST, can have id -> volunteer id, not required.
+	 * @return statement file contents
+	 */
+	 public function download_statement($data){
+	 	if ($data['id']){
+	 		/* id is set, logged in user should be superadmin */
+	 		$this->secure('admin');
+	 		$volunteer = $this->engine->loadVolunteers(array('id'=>$id));
+	 		$volunteer = $volunteer[0];
+	 		$volunteer->getStatementFileContents(false);
+	 	}else{
+	 		/* else only currently logged in user statement is available */ 
+			$this->secure('self');
+			$this->user->getStatementFileContents();	
+	 	}
+	 }
 }
 ?>
