@@ -90,7 +90,9 @@
 	</tr>
 	{ if $user->statement_file && !$user->statement_downloaded }
 		<tr>
-			<th colspan="2"><a href="/?action=download_statement">Pobierz oświadczenie dla wolontariusza</a></th>
+			<th colspan="2"><a href="/?action=download_statement">Pobierz oświadczenie dla wolontariusza</a> <br>
+				<strong class="error">OŚWIADCZENIE MOŻE BYĆ POBRANE TYLKO RAZ! ZAPISZ LUB OD RAZU WYDRUKUJ I PODPISZ.</strong>
+			</th>
 		</tr>
 	{ elseif $user->statement_downloaded }
 		<tr>

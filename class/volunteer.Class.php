@@ -150,7 +150,7 @@ final class volunteer extends genericClass implements PHPSucks{
 	/**
 	 * Proxy for getting this user statement contents.
 	 * @param updateStatementDownload default true - to update statement download status & timestamp
-	 * @return file contents
+	 * @return file contents or error.
 	 */
 	public function getStatementFileContents($updateStatementDownload = true){
 		/**
@@ -160,6 +160,30 @@ final class volunteer extends genericClass implements PHPSucks{
 		 * - update counter
 		 * - spit contents of the file for download
 		 */
+		if (!$this->statement_file){
+			throw new FileException("Brak zadeklarowanej nazwy pliku? Sprawdź pola bazy danych");
+		}
+
+		$file = $_SERVER['DOCUMENT_ROOT'].config::statements_path().$this->statement_file;
+		if (!file_exists($file)){
+			throw new FileException("Plik nie istnieje!");
+		}
+		if ($updateStatementDownload){
+			$this->statement_downloaded = 1;
+			$this->statement_downloaded_timestamp = date('Y-m-d H:i:s');
+		}
+		header('Content-Description: File Transfer');
+		header('Content-Type: application/octet-stream');
+		header('Content-Disposition: attachment; filename='.basename($file));
+		header('Content-Transfer-Encoding: binary');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate');
+		header('Pragma: public');
+		header('Content-Length: ' . filesize($file));
+		ob_clean();
+		flush();
+		readfile($file);
+		exit();
 	}
 	
 	/**

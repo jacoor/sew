@@ -119,3 +119,12 @@ class  MysqliQueryException extends Exception
 		parent::__construct("Błąd zapytania mysqli - treść komunikatu o błędzie: ".$in_errormsg);
 	}	
 }
+
+class FileException extends  Exception 
+{
+	function __construct($in_errormsg=Null,$in_errorcode=Null)
+	{
+		parent::__construct("Bład pliku:
+		{$in_errormsg}",$in_errorcode);
+	}
+}
