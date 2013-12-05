@@ -88,7 +88,7 @@
 		<th>Data rejestracji w systemie:	</th>
 		<td>{$user->r_date}</td>
 	</tr>
-	{ if $user->statement_file && !$user->statement_downloaded }
+	{ if $user->statement_file && $user->statement_downloaded!=1 }
 		<tr>
 			<th colspan="2"><a href="/?action=download_statement">Pobierz oświadczenie dla wolontariusza</a> <br>
 				<strong class="error">OŚWIADCZENIE MOŻE BYĆ POBRANE TYLKO RAZ! ZAPISZ LUB OD RAZU WYDRUKUJ I PODPISZ. <br>
