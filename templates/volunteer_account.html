@@ -22,7 +22,7 @@
 			<th>Status oświadczenia:</th>
 			<td>{$volunteer->getStatementState()}</td>	
 		</tr>
-		{if $user->ACL_check('superadmin')}
+		{if $user->ACL_check('superadmin') && $volunteer->statement_file}
 			<tr>
 				<th colspan="2" class="text-left"><a href="/?action=download_statement&amp;id={$volunteer->id}">Pobierz oświadczenie wolontariusza</a></th>
 			</tr>
