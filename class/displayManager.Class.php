@@ -457,7 +457,20 @@ class displayManager extends smarty{
 	 */
 	public function volunteer_list(){
 		$this->secure('view');
-		$volunteers = $this->engine->loadVolunteers(null, array('surname', 'name', 'PESEL', 'login','type','id','photo'));
+		$volunteers = $this->engine->loadVolunteers(null, 
+														array(
+															'surname', 
+															'name', 
+															'PESEL', 
+															'login',
+															'type',
+															'id',
+															'photo',
+															'statement_file',
+															'statement_downloaded',
+															'statement_downloaded_timestamp',
+														)
+													);
 		$idents = array();
 		foreach ($volunteers as $v){
 			 $idents[$v->id]= $this->engine->getIdentNr($v->id, $finalNr) ? $this->engine->getIdentNr($v->id, $finalNr) : 'nie ma';
@@ -831,5 +844,28 @@ class displayManager extends smarty{
 		$this->assign_by_ref('meetings',$meetings);
 		$this->display('meetings.html');
 	}
+
+	/**
+	 * download statement
+	 * @param $_REQUEST, can have id -> volunteer id, not required.
+	 * @return statement file contents
+	 */
+	 public function download_statement($data){
+	 	if ($data['id']){
+	 		/* id is set, logged in user should be superadmin */
+	 		$this->secure('admin');
+	 		$volunteer = $this->engine->loadVolunteers(array('id'=>$data['id']));
+	 		$volunteer = $volunteer[0];
+	 		$volunteer->getStatementFileContents(false);
+	 	}else{
+	 		/* else only currently logged in user statement is available */ 
+			$this->secure('self');
+			if (!$this->user->statement_downloaded){
+				$this->user->getStatementFileContents();
+			}else{
+				HTTP::redirect('/');
+			}
+	 	}
+	 }
 }
 ?>

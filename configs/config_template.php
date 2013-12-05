@@ -30,6 +30,8 @@ final class config{
 	private static $photo_save_path = '/photos/';
 	
 	private static $photo_deadline = '2013/12/26';
+
+	private static $statements_path ="/statements/";
 		
 	public static function hostname(){
 		return self::$hostname;
@@ -109,6 +111,9 @@ final class config{
 	
 	public static function photo_deadline(){
 			return self::$photo_deadline;
+	}
+	public static function statements_path(){
+			return self::$statements_path;
 	}
 }
 ?>
