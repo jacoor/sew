@@ -34,7 +34,8 @@ class displayManager extends smarty{
 		);
 
 		$this->assign('site_root', $this->site_root);
-		$this->assign('finalNr',$this->engine->session->finalNr ? $this->engine->session->finalNr : config::finalNr());
+		$this->finalNr = $this->engine->session->finalNr ? $this->engine->session->finalNr : config::finalNr();
+		$this->assign('finalNr',$this->finalNr);
 		if ($this->engine->session->isLoggedIn()){
 			$this->user = $this->engine->session->getUser();
 			$this->assign_by_ref('user', $this->user);
@@ -473,7 +474,7 @@ class displayManager extends smarty{
 													);
 		$idents = array();
 		foreach ($volunteers as $v){
-			 $idents[$v->id]= $this->engine->getIdentNr($v->id, $finalNr) ? $this->engine->getIdentNr($v->id, $finalNr) : 'nie ma';
+			 $idents[$v->id]= $this->engine->getIdentNr($v->id, $this->finalNr) ? $this->engine->getIdentNr($v->id, $this->finalNr) : 'nie ma';
 		}
 		//var_dump($idents); die;
 		$this->assign_by_ref('volunteers',$volunteers);
