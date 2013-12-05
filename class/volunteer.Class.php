@@ -138,7 +138,7 @@ final class volunteer extends genericClass implements PHPSucks{
 		if (!$sf){
 			return "Brak dokumentu";
 		}
-		if ($sf && !$sd){
+		if ($sf && $sd!=1){
 			return "Gotowe do pobrania";
 		}
 		if ($sf && $sd && $sdt){
