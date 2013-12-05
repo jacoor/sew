@@ -171,10 +171,11 @@ final class volunteer extends genericClass implements PHPSucks{
 		if ($updateStatementDownload){
 			$this->statement_downloaded = 1;
 			$this->statement_downloaded_timestamp = date('Y-m-d H:i:s');
+			$this->changed_flag = 'updated';
 		}
 		header('Content-Description: File Transfer');
-		header('Content-Type: application/octet-stream');
-		header('Content-Disposition: attachment; filename='.basename($file));
+		header('Content-Type: application/pdf');
+		header('Content-Disposition: attachment; filename='.'oswiadczenie_wolontariusza_'.$this->name.'_'.$this->surname.'.pdf');
 		header('Content-Transfer-Encoding: binary');
 		header('Expires: 0');
 		header('Cache-Control: must-revalidate');
