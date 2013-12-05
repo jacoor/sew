@@ -98,7 +98,7 @@
 				(jeśli nie możesz otworzyć tego pliku potrzebujesz programu Adobe Reader, do pobrania <a href="http://get.adobe.com/pl/reader/" target="_blank">tutaj</a> (otwiera nowe okno))
 			</th>
 		</tr>
-	{ elseif $user->statement_downloaded }
+	{ elseif $user->statement_downloaded==1 }
 		<tr>
 			<th colspan="2">Oświadczenie wolontariusza zostało pobrane: {$user->statement_downloaded_timestamp}</th>
 		</tr>
