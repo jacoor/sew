@@ -30,7 +30,11 @@ final class volunteer extends genericClass implements PHPSucks{
 	private $phone 									;
 	private $p_phone 								;
 	private $r_date 								;
-	private $rank 									;
+	private $rank 									; //ocena, liczby całkowite 1 - 5
+	private $statement_file							; //Nazwa pliku pdf z oświadczeniem Wolontariusza, pobranym z /
+														//systemu Fundacji WOŚP.
+	private $statement_downloaded; //Czy oświadczenie zostało pobrane przez wolontariusza?
+	private $statement_downloaded_timestamp; //Timestamp pobrania oświadczenia
 	private $active 								;
 	private $doc_id 								;
 	private $doc_type 							; 	//enum: available: legitymacja szkolna, legitymacja studencka, 
@@ -43,11 +47,7 @@ final class volunteer extends genericClass implements PHPSucks{
 	private $consent_processing_of_personal_data		; 	// zgoda na przetwarzanie danych. Wymagana do rejestracji. 
 															//Jedyna możliwa wartość - on
 	private $date_consent_processing_of_personal_data	; // zgoda na przetwarzanie danych - data wyrażenia zgody.	
-	/*private $processing_of_personal_data_for_marketing_purposes  ;  //zgoda na przetwarzanie danych w celach marketingowych. 
-																	//Dopuszczalne wartosci - tak, nie
-	private $date_processing_of_personal_data_for_marketing_purposes  ;  //data zmiany statusu wyrażenia zgodny na 
-																		//przerwarzanie danych w celach marketingowych
-	*/
+	
 	private $accept_of_sending_data_to_WOSP							;	//zgoda na przekazanie danych do Fundacji WOSP. 
 																		//wymagana do rejestracji w systemie. Jedyna możliwa wartosc: on
 
@@ -122,6 +122,69 @@ final class volunteer extends genericClass implements PHPSucks{
 			$this->notices = $this->engine->loadNotices($this->id);
 		$this->noticesLoadedFlag = true;
 		return $this->notices;
+	}
+	
+	/**
+	 * Check statement state
+	 * @return string
+	 * - brak dokumentu - when file name is not declared in DB
+	 * - gotowe do pobrania - when file name is declared and missing downloaded timestamp
+	 * - pobrane: timestamp   
+	 */
+	public function getStatementState(){
+		$sf = $this->statement_file;
+		$sd = $this->statement_downloaded;
+		$sdt = $this->statement_downloaded_timestamp;
+		if (!$sf){
+			return "Brak dokumentu";
+		}
+		if ($sf && !$sd){
+			return "Gotowe do pobrania";
+		}
+		if ($sf && $sd && $sdt){
+			return "Pobrane: ".$sdt;
+		}
+		return 'błąd?';
+	}
+
+	/**
+	 * Proxy for getting this user statement contents.
+	 * @param updateStatementDownload default true - to update statement download status & timestamp
+	 * @return file contents or error.
+	 */
+	public function getStatementFileContents($updateStatementDownload = true){
+		/**
+		 * - check statement state
+		 * - check if file exists
+		 * - get file contents
+		 * - update counter
+		 * - spit contents of the file for download
+		 */
+		if (!$this->statement_file){
+			throw new FileException("Brak zadeklarowanej nazwy pliku? Sprawdź pola bazy danych");
+		}
+
+		$file = $_SERVER['DOCUMENT_ROOT'].config::statements_path().$this->statement_file;
+		if (!file_exists($file)){
+			throw new FileException("Plik nie istnieje!");
+		}
+		if ($updateStatementDownload){
+			$this->statement_downloaded = 1;
+			$this->statement_downloaded_timestamp = date('Y-m-d H:i:s');
+			$this->changed_flag = 'updated';
+		}
+		header('Content-Description: File Transfer');
+		header('Content-Type: application/pdf');
+		header('Content-Disposition: attachment; filename='.'oswiadczenie_wolontariusza_'.$this->name.'_'.$this->surname.'.pdf');
+		header('Content-Transfer-Encoding: binary');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate');
+		header('Pragma: public');
+		header('Content-Length: ' . filesize($file));
+		ob_clean();
+		flush();
+		readfile($file);
+		exit();
 	}
 	
 	/**

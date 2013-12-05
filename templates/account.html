@@ -88,6 +88,18 @@
 		<th>Data rejestracji w systemie:	</th>
 		<td>{$user->r_date}</td>
 	</tr>
+	{ if $user->statement_file && !$user->statement_downloaded }
+		<tr>
+			<th colspan="2"><a href="/?action=download_statement">Pobierz oświadczenie dla wolontariusza</a> <br>
+				<strong class="error">OŚWIADCZENIE MOŻE BYĆ POBRANE TYLKO RAZ! ZAPISZ LUB OD RAZU WYDRUKUJ I PODPISZ.</strong><br>
+				(jeśli nie możesz otworzyć tego pliku potrzebujesz programu Adobe Reader, do pobrania <a href="http://get.adobe.com/pl/reader/" target="_blank">tutaj</a> (otwiera nowe okno))
+			</th>
+		</tr>
+	{ elseif $user->statement_downloaded }
+		<tr>
+			<th colspan="2">Oświadczenie wolontariusza zostało pobrane: {$user->statement_downloaded_timestamp}</th>
+		</tr>
+	{ /if }
 </table>
 
 	<div id="meeting">
@@ -101,7 +113,10 @@
 		mapka: <a href="http://www.gim17wroc.pl/kontakt.html">http://www.gim17wroc.pl/kontakt.html</a><br>
 		w dniu: <b>{$meeting->date}</b><br />
 		o godzinie: <b>{$meeting->time}</b><br />
-		<strong>Oświadczenie rodzica / opiekuna osoby niepełnoletniej można pobrać pod adresem: <a href="{$site_root}/zgoda.pdf">{$site_root}/zgoda.pdf</a></strong>
+		<strong>Oświadczenie rodzica / opiekuna osoby niepełnoletniej można pobrać pod adresem: <a href="{$site_root}/zgoda.pdf">{$site_root}/zgoda.pdf</a>
+		<br>
+		(jeśli nie możesz otworzyć tego pliku potrzebujesz programu Adobe Reader, do pobrania <a href="http://get.adobe.com/pl/reader/" target="_blank">tutaj</a> (otwiera nowe okno))
+		</strong>
 	</p>
 
 	{/if}

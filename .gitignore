@@ -3,4 +3,5 @@
 configs/config.php
 cache/templates/*
 photos/*.*
+statements/*.*
 cache/images/*.*

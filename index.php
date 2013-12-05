@@ -71,8 +71,11 @@ switch ($action){
 		$smarty->meetings();
 		break;
 	
+	case 'download_statement':
+		$smarty->download_statement($_REQUEST);
+		break;
+
 	default: $smarty->default_action();
 }
 
 ?>
- 
