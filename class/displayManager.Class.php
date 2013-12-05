@@ -861,14 +861,14 @@ class displayManager extends smarty{
 		 	}else{
 		 		/* else only currently logged in user statement is available */ 
 				$this->secure('self');
-				if (!$this->user->statement_downloaded){
+				if ($this->user->statement_downloaded!=1){
 					$this->user->getStatementFileContents();
 				}else{
 					HTTP::redirect('/');
 				}
 		 	}
 	 	}catch (FileException $e){
-	 		echo $e->getMessage();
+	 		echo ($e->getMessage());
 	 		die();
 	 	}
 	 }
