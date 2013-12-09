@@ -31,7 +31,7 @@
 			{elseif $v->type=='zakwalifikowany na finał'} naFinale {/if}" >
 			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->surname}</a></td>
 			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->name}</a></td>
-			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->login}</a></td>
+			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->login|truncate:"15"}</a></td>
 			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->PESEL}</a></td>
 			{assign var="id" value= $v->id}
 			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->getStatementState()}</a></td>
