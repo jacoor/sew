@@ -131,9 +131,7 @@ class displayManager extends smarty{
 		$this->secure('self');
 		$meetings = $this->engine->loadMeetings();
 		foreach ($meetings as $key => $val){
-			var_dump($val->date);
-			var_dump($data['date']);
-			if ($val->date != $data['date'] || $val->r_amount >= $val->persons_limit){
+			if ($val->date != $data['date'][0] || $val->r_amount >= $val->persons_limit){
 				var_dump(11);
 				unset($meetings[$key]);
 			}
