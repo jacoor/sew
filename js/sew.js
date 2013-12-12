@@ -8,7 +8,6 @@ var sew = {
 			$('#meeting').html('<p>Wczytuję dane</p>').load("/index.php",{'action':'m_date'}, 
 				function (){
 					$('#m_date').change(function(){
-						console.log($('#m_date').fieldValue())
 	    				$('#select_hour').html('Wczytuję dane').load('/index.php',{'action':'m_time','date':$('#m_date').fieldValue()})});
 	    	});
 		return false;
