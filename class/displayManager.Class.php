@@ -130,7 +130,7 @@ class displayManager extends smarty{
 	public function ajax_m_time($data){
 		$this->secure('self');
 		$meetings = $this->engine->loadMeetings();
-		var_dump($meetings);
+		var_dump($data);
 		foreach ($meetings as $key => $val){
 			if ($val->date != $data['date'] || $val->r_amount >= $val->persons_limit)
 				unset($meetings[$key]);
