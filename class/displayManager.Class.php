@@ -132,7 +132,6 @@ class displayManager extends smarty{
 		$meetings = $this->engine->loadMeetings();
 		foreach ($meetings as $key => $val){
 			if ($val->date != $data['date'][0] || $val->r_amount >= $val->persons_limit){
-				var_dump(11);
 				unset($meetings[$key]);
 			}
 		}
