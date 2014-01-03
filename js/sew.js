@@ -31,6 +31,7 @@ var sew = {
 		'overlayShow'	:	false
 	});
 	this.register_form_check();
+	this.lazy_load();
 },
 	
 	notice_create : function(){
@@ -226,6 +227,11 @@ var sew = {
 			if (!T.photo_check()){
 				e.preventDefault();
 			}
+		});
+	},
+	lazy_load : function(){
+		$("img.lazy").lazyload({
+		    effect : "fadeIn"
 		});
 	}
 }
