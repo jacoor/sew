@@ -1,4 +1,4 @@
-{spaceless}
+{strip}
 {if $photo }
     <a class="fancybox" href="/photos/{$photo}">
         <img class="lazy" data-original="{thumb file="/photos/"|cat:$photo link="false" img="true" width=50}"  width="50" heigh="50">
@@ -8,4 +8,4 @@
     Brak zdjecia 
 {/if}
 <br />
-{ endspaceless }
+{ /strip }
