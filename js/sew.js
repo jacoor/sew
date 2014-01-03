@@ -231,7 +231,6 @@ var sew = {
 	},
 	lazy_load : function(){
 		$("img.lazy").lazyload({
-		    effect : "fadeIn",
 		    threshold : 1200
 		});
 	}
