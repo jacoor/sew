@@ -5,10 +5,10 @@ var sew = {
 		$('.jq_date').datepicker({yearRange: "-100:+0"}).attr("readonly", "readonly");
 		}
 	$('#meeting a').click(function(){
-			$('#meeting').html('<p>Wczytuję dane</p>').load("/index.php/",{'action':'m_date'}, 
+			$('#meeting').html('<p>Wczytuję dane</p>').load("/index.php",{'action':'m_date'}, 
 				function (){
 					$('#m_date').change(function(){
-	    		$('#select_hour').html('Wczytuję dane').load('/index.php',{'action':'m_time','date':$('#m_date').fieldValue()})});
+	    		$('#select_hour').html('Wczytuję dane').load('/index.php',{'action':'m_time','date':$('#m_date').val()})});
 	    	});
 		return false;
 	});
