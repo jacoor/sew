@@ -188,13 +188,14 @@ private function __construct(){
 	 * @return unknown_type
 	 */
 	private static function I_hate_fucking_magic_quotes(){
-		if (ini_get ('magic_quotes_sybase') != false)
-		 die('Yo! I will not work untill you disable magic_quotes_sybase in your php.ini');
+		if (ini_get ('magic_quotes_sybase') != false){
+			die('Yo! I will not work untill you disable magic_quotes_sybase in your php.ini');
+		}
 		if (get_magic_quotes_gpc()){
-			array_walk_recursive(&$_REQUEST, 'sqlManager::clearslashes');
-			array_walk_recursive(&$_POST, 'sqlManager::clearslashes');
-			array_walk_recursive(&$_GET, 'sqlManager::clearslashes');
-			array_walk_recursive(&$_COOKIE, 'sqlManager::clearslashes');
+			array_walk_recursive($_REQUEST, 'sqlManager::clearslashes');
+			array_walk_recursive($_POST, 'sqlManager::clearslashes');
+			array_walk_recursive($_GET, 'sqlManager::clearslashes');
+			array_walk_recursive($_COOKIE, 'sqlManager::clearslashes');
 		}
 	} 
 	/**
