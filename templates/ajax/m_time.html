@@ -1,6 +1,12 @@
-<select name="m_id">
-				{foreach from=$meetings item="m"}
-						<option value="{$m->id}">{$m->time}</option>
-				{/foreach}
-</select>
-{ if $meetings[0].place}<span>{$meetings[0].place}</span>{/if}
+<span>
+    <select name="m_id">
+    				{foreach from=$meetings item="m"}
+    						<option value="{$m->id}">{$m->time}</option>
+    				{/foreach}
+    </select>
+    {foreach from=$meetings item="m" name="m_loop"}
+        {if $smarty.foreach.m_loop.index == 0}
+            { if $m->place}<span>{$m->place}</span>{/if}
+        {/if}
+    {/foreach}
+</span>
