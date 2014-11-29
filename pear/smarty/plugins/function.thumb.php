@@ -53,6 +53,7 @@
 
 function smarty_function_thumb($params, &$smarty)
 {
+	set_time_limit(60);
 	// Start time measurement
 	if (isset($params['dev']))
 	{

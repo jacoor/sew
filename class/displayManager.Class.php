@@ -131,8 +131,9 @@ class displayManager extends smarty{
 		$this->secure('self');
 		$meetings = $this->engine->loadMeetings();
 		foreach ($meetings as $key => $val){
-			if ($val->date != $data['date'] || $val->r_amount >= $val->persons_limit)
+			if ($val->date != $data['date'][0] || $val->r_amount >= $val->persons_limit){
 				unset($meetings[$key]);
+			}
 		}
 		$this->assign_by_ref('meetings', $meetings); //będzie ajaxem
 		$this->display('ajax/m_time.html');
