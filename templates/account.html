@@ -111,9 +111,7 @@
 	{else}
 	<p>Jesteś już umówiony na spotkanie z nami.</p>
 	<p>Spotkanie odbędzie się w <br>
-		<b>Biurze Festiwalowym IMPART</b><br />
-		przy ulicy <b>ul. Mazowieckiej 17</b>(koło Urzędu Marszałkowskiego)<br />
-		mapka: <a href="http://tinyurl.com/omcrg5s">http://tinyurl.com/omcrg5s</a><br>
+		{$meeting->place} <br>
 		w dniu: <b>{$meeting->date}</b><br />
 		o godzinie: <b>{$meeting->time}</b><br />
 		<strong>Oświadczenie rodzica / opiekuna osoby niepełnoletniej można pobrać pod adresem: <a href="{$site_root}/zgoda.pdf">{$site_root}/zgoda.pdf</a>
