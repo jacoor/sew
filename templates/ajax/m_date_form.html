@@ -20,6 +20,11 @@
 						{/if}
 					{/foreach}
 				</select>
+				{foreach from=$meetings item="m"}
+					{if $m->date == $date}
+						{if $m->place}<span>{$m->place}</span>{/if}
+					{/if}
+				{/foreach}
 			</span>
 			<input type="submit"  value="zapisz termin" />
 		</fieldset>

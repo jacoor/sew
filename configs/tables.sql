@@ -1,29 +1,31 @@
--- phpMyAdmin SQL Dump
--- version 3.2.5
--- http://www.phpmyadmin.net
---
--- Host: mysql2.icenter.pl
--- Czas wygenerowania: 18 Lis 2012, 20:00
--- Wersja serwera: 5.1.51
--- Wersja PHP: 5.2.13
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4096
+#
+# http://www.sequelpro.com/
+# http://code.google.com/p/sequel-pro/
+#
+# Host: 127.0.0.1 (MySQL 5.6.21)
+# Database: sew
+# Generation Time: 2014-11-28 18:13:36 +0000
+# ************************************************************
 
-SET FOREIGN_KEY_CHECKS=0;
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT=0;
-START TRANSACTION;
 
---
--- Baza danych: `sew_wosp`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- --------------------------------------------------------
 
---
--- Struktura tabeli dla  `meetings`
---
+# Dump of table meetings
+# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `meetings`;
-CREATE TABLE IF NOT EXISTS `meetings` (
+
+CREATE TABLE `meetings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL DEFAULT '2000-01-01',
   `time` time NOT NULL DEFAULT '00:00:00',
@@ -31,17 +33,18 @@ CREATE TABLE IF NOT EXISTS `meetings` (
   `r_amount` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'ilu juz sie zglosilo\n',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   `active` tinyint(1) NOT NULL DEFAULT '0',
+  `place` varchar(255) DEFAULT NULL COMMENT 'Miejsce',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='terminy rekrutacji' AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='terminy rekrutacji';
 
--- --------------------------------------------------------
 
---
--- Struktura tabeli dla  `notices`
---
+
+# Dump of table notices
+# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `notices`;
-CREATE TABLE IF NOT EXISTS `notices` (
+
+CREATE TABLE `notices` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vid` int(11) NOT NULL COMMENT 'id wolontariusza\n',
   `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -58,17 +61,18 @@ CREATE TABLE IF NOT EXISTS `notices` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `vid` (`vid`),
-  KEY `mid` (`mid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='zdarzenia dotyczące wolontariuszy' AUTO_INCREMENT=41 ;
+  KEY `mid` (`mid`),
+  CONSTRAINT `notices_ibfk_1` FOREIGN KEY (`vid`) REFERENCES `volunteers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='zdarzenia dotyczące wolontariuszy';
 
--- --------------------------------------------------------
 
---
--- Struktura tabeli dla  `volunteers`
---
+
+# Dump of table volunteers
+# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `volunteers`;
-CREATE TABLE IF NOT EXISTS `volunteers` (
+
+CREATE TABLE `volunteers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `surname` varchar(45) NOT NULL,
@@ -93,9 +97,9 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   `p_phone` varchar(45) DEFAULT NULL COMMENT '''numer do rodzica''',
   `r_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '''data rejestracji''',
   `rank` tinyint(4) NOT NULL DEFAULT '0' COMMENT '''ocena''',
-  `statement_file` varchar(255) NULL DEFAULT NULL COMMENT '''Nazwa pliku pdf z oświadczeniem Wolontariusza, pobranym z systemu Fundacji WOŚP.''', 
-  `statement_downloaded` binary(1) NOT NULL DEFAULT 0 COMMENT '''Czy oświadczenie zostało pobrane przez wolontariusza?''',
-  `statement_downloaded_timestamp` timestamp NULL DEFAULT NULL  COMMENT '''Timestamp pobrania oświadczenia''', 
+  `statement_file` varchar(255) DEFAULT NULL,
+  `statement_downloaded` binary(1) NOT NULL DEFAULT '0',
+  `statement_downloaded_timestamp` timestamp NULL DEFAULT NULL,
   `active` binary(1) NOT NULL DEFAULT '0' COMMENT 'do potwierdzania adresu email - po potwierdzeniu 1 co uaktywnia konto',
   `doc_id` varchar(45) NOT NULL DEFAULT '0' COMMENT 'numer dokumentu tożsamości',
   `doc_type` enum('legitymacja szkolna','legitymacja studencka','dowód osobisty','paszport','karta stałego pobytu','prawo jazdy','książeczka wojskowa','inne') NOT NULL,
@@ -112,16 +116,14 @@ CREATE TABLE IF NOT EXISTS `volunteers` (
   UNIQUE KEY `PESEL` (`PESEL`),
   UNIQUE KEY `email` (`email`),
   KEY `surname` (`surname`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Ograniczenia dla zrzutów tabel
---
 
---
--- Ograniczenia dla tabeli `notices`
---
-ALTER TABLE `notices`
-  ADD CONSTRAINT `notices_ibfk_1` FOREIGN KEY (`vid`) REFERENCES `volunteers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

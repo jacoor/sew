@@ -13,6 +13,7 @@ final class meeting extends genericClass implements PHPSucks{
 	private $r_amount = 0;
 	private $deleted = 0;
 	private $active = 0;
+	private $place = '';
 	protected $engine;
 	
 	/**
