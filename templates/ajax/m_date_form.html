@@ -20,11 +20,11 @@
 						{/if}
 					{/foreach}
 				</select>
-				{foreach from=$meetings item="m"}
-					{if $m->date == $date}
-						{if $m->place}<span>{$m->place}</span>{/if}
-					{/if}
-				{/foreach}
+                {foreach from=$meetings item="m" name="m_loop"}
+                    {if $m->date == $date &&  $smarty.foreach.m_loop.index == 0}
+                        {if $m->place}<span>{$m->place}</span>{/if}
+                    {/if}
+                {/foreach}
 			</span>
 			<input type="submit"  value="zapisz termin" />
 		</fieldset>
