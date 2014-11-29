@@ -4,7 +4,7 @@ var sew = {
 	if ($('.jq_date').length>0){
 		$('.jq_date').datepicker({yearRange: "-100:+0"}).attr("readonly", "readonly");
 		}
-	$('#meeting a').click(function(){
+	$('#meeting a#load_meetings').click(function(){
 			$('#meeting').html('<p>Wczytuję dane</p>').load("/index.php",{'action':'m_date'}, 
 				function (){
 					$('#m_date').change(function(){
