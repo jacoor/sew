@@ -341,7 +341,7 @@ if ($params['square_color']=='transparent') $params['type']=3;
 		$returner = $_RETURN['img'];
 	}
 
-	if (file_exists($SITE_ROOT . $_DST['file']) AND !$params['dev'])
+	if (file_exists($_SERVER['DOCUMENT_ROOT'] . $_DST['file']) AND !$params['dev'])
 	{
 		if (($params['img']=='true'))
 		{
