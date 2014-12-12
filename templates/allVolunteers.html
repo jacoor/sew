@@ -13,6 +13,7 @@
 	</ul>
 	<table border="1" summary="Lista Wolontariuszy" width="100%" id="allVolunteers">
 		<tr>
+			<th>LP.</th>
 			<th>Nazwisko</th>
 			<th>Imię</th>
 			<th>Login</th>
@@ -24,13 +25,14 @@
 			{/if}
 		</tr>
 	 {if $volunteers}
-	  {foreach from=$volunteers item="v"}
+	  {foreach name="volunteers" from=$volunteers item="v"}
 		<tr class="{if $v->type=='czarna lista'} czarnaLista 
 			{elseif $v->type=='ppatrol'} ppatrol
 			{elseif $v->type=='sztab'} sztab
 			{elseif $v->type=='zaufany'} zaufany
 			{elseif $v->type=='dane w systemie fundacyjnym (zakwalifikowany na finał)'}naFinaleDanewFundacji
 			{elseif $v->type=='zakwalifikowany na finał'} naFinale {/if}" >
+			<td>{ $smarty.foreach.volunteers.index+1 }</td>
 			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->surname}</a></td>
 			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->name}</a></td>
 			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->login|truncate:"15"}</a></td>
