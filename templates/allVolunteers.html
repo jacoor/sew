@@ -19,7 +19,9 @@
 			<th>PESEL</th>
 			<th>Status oświadczenia</th>
 			<th>Nr. identyfikatora</th>
-			<th>Zdjęcie</th>
+			{if $user->ACL_check('superadmin')}
+				<th>Zdjęcie</th>
+			{/if}
 		</tr>
 	 {if $volunteers}
 	  {foreach from=$volunteers item="v"}
@@ -36,7 +38,9 @@
 			{assign var="id" value= $v->id}
 			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$v->getStatementState()}</a></td>
 			<td><a href="/?action=volunteer_view&amp;id={$v->id}">{$idents.$id}</a></td>
-			<td>{include file="box/photo.html" photo=$v->photo}</td>
+			{if $user->ACL_check('superadmin')}
+				<td>{include file="box/photo.html" photo=$v->photo}</td>
+			{/if}
 		</tr>
 		{/foreach}
 	{/if}
